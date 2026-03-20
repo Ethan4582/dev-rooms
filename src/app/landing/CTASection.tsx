@@ -15,8 +15,10 @@ export default function CTASection() {
             <span className="font-label uppercase tracking-[0.2em]">Browse All Rooms</span>
             <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">rocket_launch</span>
           </Link>
-          <button className="bg-surface text-on-surface ghost-border px-10 py-5 transition-all hover:bg-surface-container-high active:scale-95 font-label uppercase tracking-[0.2em]">
-            Sign Up Now
+          <button className="relative group overflow-hidden px-10 py-5 transition-all active:scale-95 font-label uppercase tracking-[0.2em] font-bold text-primary">
+            <span className="relative z-10 transition-colors group-hover:text-primary-foreground">Sign Up Now</span>
+            <div className="absolute inset-0 border border-primary/50 group-hover:bg-primary transition-all duration-300"></div>
+            <div className="absolute inset-0 bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </button>
         </div>
         <div className="mt-12 flex justify-center gap-8 text-on-surface-variant font-mono text-[10px] uppercase tracking-widest opacity-60">

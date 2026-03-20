@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import { DeleteIcon, LogOutIcon, Search, User as UserIcon } from "lucide-react";
+import { DeleteIcon, LogOutIcon, Search, User as UserIcon, Github } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
@@ -171,7 +171,14 @@ export function Header({ className, showSearch = false }: { className?: string; 
           </form>
         )}
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
+          <Link 
+            href="https://github.com/Ethan4582/dev-rooms" 
+            target="_blank"
+            className="text-outline hover:text-primary transition-colors active:scale-95"
+          >
+            <Github className="w-5 h-5" />
+          </Link>
           {!session ? (
             <button
               onClick={() => signIn()}

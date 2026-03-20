@@ -28,45 +28,39 @@ export default function HeroSection() {
           </div>
         </div>
         <div className="md:col-span-5 relative flex items-center justify-center">
-          {/* Technical UI Mockup */}
-          <div className="w-full bg-surface-container-lowest ghost-border p-4 font-mono text-[11px] leading-tight relative shadow-2xl shadow-primary/5">
-            <div className="flex items-center justify-between mb-4 border-b border-outline-variant/30 pb-2">
-              <div className="flex gap-1.5">
-                <div className="w-2.5 h-2.5 bg-error/40"></div>
-                <div className="w-2.5 h-2.5 bg-tertiary-dim/40"></div>
-                <div className="w-2.5 h-2.5 bg-primary/40"></div>
-              </div>
-              <span className="text-on-surface-variant opacity-50">dev_finder_v1.0.4</span>
+          <div className="relative w-full aspect-video md:aspect-square group">
+            {/* Main Hero Image */}
+            <div className="absolute inset-0 bg-surface-container-lowest ghost-border overflow-hidden shadow-2xl shadow-primary/10">
+              <img 
+                src="/hero.png" 
+                alt="DevFinder Interface" 
+                className="w-full h-full object-contain grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-60"></div>
             </div>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3 bg-surface-container p-2">
+
+            {/* Floating Info Tags */}
+           
+            <motion.div 
+               initial={{ opacity: 0, x: -20 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ delay: 0.7 }}
+               className="absolute bottom-8 -left-8 bg-surface-container-highest border border-outline-variant/30 backdrop-blur-md p-4 shadow-2xl z-20 hidden lg:block"
+            >
+              <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-primary/20 flex items-center justify-center text-primary ghost-border">
                   <span className="material-symbols-outlined text-sm">code</span>
                 </div>
                 <div>
-                  <div className="text-primary font-bold">Refactor/Auth_Module</div>
-                  <div className="text-on-surface-variant">2/4 Developers Joined</div>
-                  <div className="flex gap-2 mt-1 font-mono">
-                    <span className="bg-surface-container-highest px-1 border border-outline-variant/20 italic">TypeScript</span>
-                    <span className="bg-surface-container-highest px-1 border border-outline-variant/20 italic">Node.js</span>
-                  </div>
+                  <div className="text-[10px] font-black font-headline uppercase tracking-widest text-on-surface">Refactor/Auth_Module</div>
+                  <div className="text-[8px] font-mono text-outline/60 mt-0.5 uppercase tracking-widest leading-none">Status: Active_Session</div>
                 </div>
               </div>
-              <div className="text-on-surface-variant/40 pl-2">-- fetching active_sessions...</div>
-              <div className="flex items-start gap-3 bg-surface-container p-2">
-                <div className="w-8 h-8 bg-tertiary/20 flex items-center justify-center text-tertiary ghost-border">
-                  <span className="material-symbols-outlined text-sm">terminal</span>
-                </div>
-                <div>
-                  <div className="text-tertiary font-bold">Kernel_Optimization</div>
-                  <div className="text-on-surface-variant">1/2 Developers Joined</div>
-                  <div className="flex gap-2 mt-1 font-mono">
-                    <span className="bg-surface-container-highest px-1 border border-outline-variant/20 italic">Rust</span>
-                    <span className="bg-surface-container-highest px-1 border border-outline-variant/20 italic">Wasm</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </motion.div>
+
+            {/* Decorative Corner Accents */}
+            <div className="absolute -top-2 -left-2 w-12 h-12 border-t-2 border-l-2 border-primary/20 pointer-events-none z-10" />
+            <div className="absolute -bottom-2 -right-2 w-12 h-12 border-b-2 border-r-2 border-primary/20 pointer-events-none z-10" />
           </div>
           {/* Decorative background grid */}
           <div className="absolute inset-0 -z-10 pointer-events-none opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #484848 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
@@ -74,4 +68,4 @@ export default function HeroSection() {
       </div>
     </section>
   );
-}
+}

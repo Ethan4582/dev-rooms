@@ -12,16 +12,6 @@ import Link from "next/link";
 export default function SigninPage() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSignIn = async () => {
-    setIsLoading(true);
-    try {
-      await signIn("google", { callbackUrl: "/browse" });
-    } catch (error) {
-      console.error("Sign in failed:", error);
-      setIsLoading(false);
-    }
-  };
-
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-background text-foreground relative overflow-hidden font-body selection:bg-primary selection:text-primary-foreground">
       {/* Background Grid & Glows - Creating depth and a "tech" atmosphere */}
@@ -63,9 +53,12 @@ export default function SigninPage() {
             </div>
 
             {/* Main Authentication Action */}
-            <div className="w-full space-y-6">
+            <div className="w-full space-y-6 pb-4">
               <button
-                onClick={handleSignIn}
+                onClick={() => {
+                  setIsLoading(true);
+                  signIn("google", { callbackUrl: "/browse" });
+                }}
                 disabled={isLoading}
                 className="group relative w-full flex items-center gap-4 bg-white hover:bg-white/90 disabled:bg-white/50 disabled:cursor-not-allowed text-black font-label uppercase tracking-widest text-[11px] py-4 px-6 transition-all active:scale-[0.98] shadow-lg shadow-white/5"
               >
@@ -100,12 +93,6 @@ export default function SigninPage() {
                   <MoveRight className="absolute right-6 w-4 h-4 opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
                 )}
               </button>
-
-              {/* Pseudo-terminal log for aesthetic effect */}
-              <div className="flex flex-col gap-2 text-[8px] text-muted-foreground/40 font-mono text-left opacity-60 overflow-hidden h-8">
-                <p className="animate-in slide-in-from-left duration-300">{"[LOG]:"} INITIALIZING AUTH_PROVIDER::GOOGLE</p>
-                <p className="animate-in slide-in-from-left duration-500 delay-200">{"[LOG]:"} WAITING FOR CREDENTIAL_HANDSHAKE...</p>
-              </div>
             </div>
             
             <div className="space-y-4 pt-4 w-full">

@@ -47,8 +47,15 @@ export function DevfinderVideo({ room }: { room: Room }) {
         tokenProvider: () => generateTokenAction(),
       });
 
-      const call = client.call("default", String(room.id));
+      const call = client.call("development", String(room.id));
       await call.join({ create: true });
+      
+      try {
+        await call.camera.disable();
+        await call.microphone.disable();
+      } catch (err) {
+        console.warn("Initial disable ignored", err);
+      }
 
       if (!active) return;
 
@@ -70,8 +77,6 @@ export function DevfinderVideo({ room }: { room: Room }) {
         
         const cleanup = async () => {
           try {
-            await callToLeave.camera.disable();
-            await callToLeave.microphone.disable();
             await callToLeave.leave();
             await clientToDisconnect.disconnectUser();
           } catch (e) {
@@ -89,8 +94,6 @@ export function DevfinderVideo({ room }: { room: Room }) {
 
     try {
       if (call) {
-        await call.camera.disable();
-        await call.microphone.disable();
         await call.leave();
       }
       if (client) {

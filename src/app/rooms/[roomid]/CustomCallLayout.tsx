@@ -4,14 +4,15 @@ import {
   useCallStateHooks, 
   ParticipantView,
   StreamVideoParticipant,
-  useCall
+  useCall,
+  hasAudio
 } from "@stream-io/video-react-sdk";
 import { 
   Mic, MicOff, Video, VideoOff, ScreenShare, 
   Smile, PhoneOff, Github, User, Info, 
   MoreVertical, Command, Maximize2, Settings
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Room } from "@/db/schema";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -55,6 +56,28 @@ export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () =>
   // Sorting: Creator first, then others
   const roomCreator = participants.find(p => p.userId === room.userId);
   const otherParticipants = participants.filter(p => p.userId !== room.userId);
+
+  // Participant join notifications
+  const prevParticipantsRef = useRef(participants);
+  useEffect(() => {
+    const previous = prevParticipantsRef.current;
+    const current = participants;
+    
+    // Only fire if someone actually joined
+    if (current.length > previous.length) {
+      const newUsers = current.filter(c => !previous.find(p => p.userId === c.userId));
+      newUsers.forEach(u => {
+        // Exclude local participant edge cases
+        if (!u.isLocalParticipant) {
+          toast.success(`${u.name || "A user"} joined the room`, {
+            style: { background: '#111', color: '#4edea3', border: '1px solid rgba(78,222,163,0.2)' }
+          });
+        }
+      });
+    }
+    
+    prevParticipantsRef.current = current;
+  }, [participants]);
 
   const { camera, isMute: isCameraMuted } = useCameraState();
   const { microphone, isMute: isMicMuted } = useMicrophoneState();
@@ -200,7 +223,7 @@ export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () =>
                        <span className="bg-black/40 text-[10px] text-white font-bold px-2 py-0.5 backdrop-blur-sm uppercase truncate max-w-[120px] font-['Space_Grotesk'] tracking-wider">
                          {String(participant.name)}
                        </span>
-                       {!(participant as any).audioMuted ? (
+                       {hasAudio(participant) ? (
                          <span className="material-symbols-outlined text-[14px] text-[#4edea3]">mic</span>
                        ) : (
                          <span className="material-symbols-outlined text-[14px] text-[#ee7d77]">mic_off</span>
@@ -363,7 +386,7 @@ function ParticipantRow({ p, isCreator, isOwner, handleMute, handleRemove }: {
         </div>
       </div>
       <div className="flex gap-2 items-center">
-        {!(p as any).audioMuted ? (
+        {hasAudio(p) ? (
           <span className="material-symbols-outlined text-[16px] text-[#4edea3] drop-shadow-[0_0_5px_rgba(78,222,163,0.5)]">mic</span>
         ) : (
           <span className="material-symbols-outlined text-[16px] text-[#ee7d77] opacity-40 group-hover:opacity-100 transition-opacity">mic_off</span>
