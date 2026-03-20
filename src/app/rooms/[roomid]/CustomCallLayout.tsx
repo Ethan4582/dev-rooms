@@ -125,7 +125,7 @@ export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () =>
 
   const handleRemoveUser = async (pId: string) => {
     try {
-       await call?.kickUser(pId);
+       await (call as any)?.removeMembers([pId]);
        toast.success("User removed from session");
     } catch (e) {
        toast.error("Failed to remove user");
@@ -134,7 +134,7 @@ export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () =>
 
   return (
     <div className="font-['Inter'] relative bg-[#0e0e0e] text-[#e7e5e4] h-screen w-full overflow-hidden flex flex-col">
-       {/* TopAppBar */}
+
        <header className="bg-[#0e0e0e] text-[#4edea3] font-['Space_Grotesk'] tracking-tight flex justify-between items-center w-full px-6 h-14 border-b border-[#484848]/20 z-50 shrink-0">
           <div className="text-xl font-bold tracking-tighter text-[#4edea3]">CARBON_FORGE_COLLAB</div>
           <div className="flex items-center gap-6">
@@ -153,17 +153,17 @@ export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () =>
           </div>
        </header>
 
-       <div className="flex flex-1 overflow-hidden">
-         {/* Left Global App Sidebar */}
+       <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
+       
          {leftSidebarOpen && (
-           <div className="z-50 h-full border-r border-[#484848]/20 bg-[#000000] shrink-0">
+           <div className="absolute lg:static z-50 h-full w-64 lg:w-auto border-r border-[#484848]/20 bg-[#000000] shrink-0 transition-transform">
              <Sidebar onToggle={() => setLeftSidebarOpen(false)} />
            </div>
          )}
 
-         {/* Main Content Canvas */}
+       
          <main className="flex-1 bg-[#0e0e0e] p-4 flex flex-col gap-4 overflow-hidden relative pb-24 duration-300">
-            {/* Primary Area */}
+           
             <div className="relative flex-1 bg-[#000000] overflow-hidden group border border-[#484848]/20 bg-black">
                {mainParticipant && (
                  <ParticipantView
@@ -172,7 +172,7 @@ export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () =>
                  />
                )}
                
-               {/* Overlay Metadata */}
+            
                {mainParticipant && (
                <div className="absolute top-4 left-4 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 py-1.5 border border-[#484848]/30">
                   <span className="material-symbols-outlined text-[16px] text-[#4edea3]">
@@ -193,7 +193,7 @@ export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () =>
                   </div>
                </div>
 
-               {/* Local / Floating Mini Tile */}
+               
                {localParticipant && localParticipant.sessionId !== mainParticipant?.sessionId && (
                <div className="absolute bottom-4 left-4 w-48 aspect-video bg-[#1f2020] border-2 border-[#4edea3] shadow-2xl overflow-hidden">
                   <ParticipantView
@@ -207,7 +207,7 @@ export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () =>
                )}
             </div>
 
-            {/* Secondary Strip: Active Camera Grid */}
+           
             {stripParticipants.length > 0 && (
             <div className="h-32 flex gap-4 overflow-x-auto custom-scrollbar shrink-0">
                {stripParticipants.map(participant => (
@@ -241,7 +241,7 @@ export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () =>
          </main>
 
          {/* Meeting Sidebar (Right) */}
-         <aside className="w-80 bg-[#000000] border-l border-[#484848]/20 flex flex-col z-40 shrink-0 shadow-2xl pb-20">
+         <aside className="w-full lg:w-80 bg-[#000000] border-t lg:border-t-0 lg:border-l border-[#484848]/20 flex flex-col z-40 shrink-0 shadow-2xl pb-24 h-1/3 lg:h-full">
             <div className="p-6 border-b border-[#484848]/20 shrink-0">
                 <h2 className="font-['Space_Grotesk'] text-xl font-bold tracking-tight text-white mb-1 uppercase break-words w-full">
                   {String((room as any).name).replace(/[^a-zA-Z0-9_\- ]/g, "").replace(/\s+/g, "_")}
@@ -293,9 +293,9 @@ export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () =>
        </div>
 
        {/* BottomNavBar (Controls) */}
-       <footer className="fixed bottom-0 w-full z-50 flex justify-center items-center gap-4 px-8 bg-[#131313] h-20 border-t border-[#484848]/20 font-['Space_Grotesk'] font-medium text-[11px]">
+       <footer className="fixed bottom-0 left-0 w-full z-50 flex justify-center items-center gap-2 md:gap-4 px-2 md:px-8 bg-[#131313] h-20 border-t border-[#484848]/20 font-['Space_Grotesk'] font-medium text-[10px] md:text-[11px]">
           {/* Call Controls */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 md:gap-3">
              <button 
                onClick={async () => await microphone.toggle()}
                className={cn(

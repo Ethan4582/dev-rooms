@@ -17,7 +17,7 @@ export function DashboardShell({ children, title, description, actions, requireA
   const { data: session, status } = useSession();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  // Authenticated users have sidebar by default, unauthenticated do NOT have sidebar
+ 
   const showSidebar = status === "authenticated";
 
   useEffect(() => {

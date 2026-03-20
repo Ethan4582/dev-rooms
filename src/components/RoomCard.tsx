@@ -31,7 +31,7 @@ export function RoomCard({ room, isOwner, onDelete, onEdit }: RoomCardProps) {
 
   return (
     <div className="bg-surface-dim border border-outline-variant/10 p-8 flex flex-col group hover:bg-[#121212] transition-all duration-300 relative overflow-hidden">
-      {/* Card Header: Name and Active Count */}
+    
       <div className="flex justify-between items-start mb-6 gap-4">
         <h3 className="font-headline font-bold text-2xl tracking-tight text-on-surface group-hover:text-primary transition-colors leading-tight truncate w-full">
           {String(room.name ?? "Untitled Room")}
@@ -61,7 +61,7 @@ export function RoomCard({ room, isOwner, onDelete, onEdit }: RoomCardProps) {
         </div>
       </div>
 
-      {/* Footer: Join Button and Actions/GitHub */}
+     
       <div className="flex items-center gap-3 pt-6">
         <Link 
           href={`/rooms/${room.id}`}

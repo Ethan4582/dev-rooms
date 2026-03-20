@@ -3,9 +3,9 @@ import { StreamClient } from '@stream-io/node-sdk';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const roomId = params.id;
+  const { id: roomId } = await params;
   const apiKey = process.env.NEXT_PUBLIC_GET_STREAM_API_KEY;
   const apiSecret = process.env.GET_STREAM_SECRET_KEY;
 

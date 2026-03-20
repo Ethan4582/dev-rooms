@@ -29,7 +29,7 @@ export default function HeroSection() {
         </div>
         <div className="md:col-span-5 relative flex items-center justify-center">
           <div className="relative w-full aspect-video md:aspect-square group">
-            {/* Main Hero Image */}
+            
             <div className="absolute inset-0 bg-surface-container-lowest ghost-border overflow-hidden shadow-2xl shadow-primary/10">
               <img 
                 src="/hero.png" 
@@ -39,7 +39,7 @@ export default function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-60"></div>
             </div>
 
-            {/* Floating Info Tags */}
+           
            
             <motion.div 
                initial={{ opacity: 0, x: -20 }}
@@ -58,11 +58,11 @@ export default function HeroSection() {
               </div>
             </motion.div>
 
-            {/* Decorative Corner Accents */}
+            
             <div className="absolute -top-2 -left-2 w-12 h-12 border-t-2 border-l-2 border-primary/20 pointer-events-none z-10" />
             <div className="absolute -bottom-2 -right-2 w-12 h-12 border-b-2 border-r-2 border-primary/20 pointer-events-none z-10" />
           </div>
-          {/* Decorative background grid */}
+          
           <div className="absolute inset-0 -z-10 pointer-events-none opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #484848 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
         </div>
       </div>

@@ -10,16 +10,17 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 export default async function EditRoomPage({
   params,
 }: {
-  params: { roomid: string }; 
+  params: Promise<{ roomid: string }>; 
 }) {
   unstable_noStore();
   
+  const { roomid } = await params;
   const session = await getServerSession(authOptions);
   if (!session) {
-    return redirect(`/api/auth/signin?callbackUrl=/edit-room/${params.roomid}`);
+    return redirect(`/api/auth/signin?callbackUrl=/edit-room/${roomid}`);
   }
   
-  const room = await getRoom(params.roomid);
+  const room = await getRoom(roomid);
   
   if (!room) {
     return <DashboardShell><div className="p-8">Room not found</div></DashboardShell>;
@@ -32,7 +33,7 @@ export default async function EditRoomPage({
   return (
     <DashboardShell 
       title="Modify Node" 
-      description={`Updating cluster // ID: ${params.roomid}`}
+      description={`Updating cluster // ID: ${roomid}`}
     >
       <div className="max-w-2xl mx-auto">
         <Card className="bg-surface-dim border-outline-variant/30 shadow-2xl shadow-primary/5">

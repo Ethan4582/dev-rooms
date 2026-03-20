@@ -1,76 +1,129 @@
-# DevRooms
+# RepoSense
 
-DevRooms enables developers to collaborate in real-time through shared coding environments with integrated video conferencing. Create rooms, pair program, and debug together – all within a single platform.
+**Chat with your GitHub repositories using AI-powered analysis and summarization**
 
-## 📺 Demo Video
+<img src="public/img3.png" alt="RepoSense Demo Cover" style="width:100%;max-width:600px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);" />
 
-[![DevRooms Demo](https://img.youtube.com/vi/REN1kfR9sdg/0.jpg)](https://youtu.be/REN1kfR9sdg)
+<br/>
+
+# Demo Video
+
+[![Demo Video](public/img2.png)](https://www.youtube.com/watch?v=PQqPkdpA0V0)
 
 
-## ✨ Features
+RepoSense transforms GitHub repositories into intelligent, searchable knowledge bases. Upload your repository, and our AI will analyze, summarize, and create a conversational interface for your codebase.
 
-### Core Functionality
-- **Real-time Code Collaboration**
-  - Shared code editor with syntax highlighting
-  - Live cursor positions and code changes
-- **Video Conferencing**
-  - Integrated video/audio calls with screen sharing
-  - Powered by GetStream.io 
-- **Room Management**
-  - Create/update/delete coding rooms
-  - Set primary programming languages
-  - GitHub repository integration
+## Key Features
 
-### Developer Experience
-- **Authentication**
-  - Google OAuth via NextAuth
-  - Session management with JWT
-- **Search & Discovery**
-  - Filter rooms by programming language
-  - Tag-based search system
-- **Responsive Design**
-  - Fully responsive UI for all devices
-  - Dark/light mode toggle
+### 🔍 **Repository Analysis**
+- Automatic extraction and analysis of important files
+- AI-powered file summarization using Gemini
+- Commit history visualization with intelligent summaries
 
-## 🛠 Tech Stack
+### 💬 **Intelligent Q&A**
+- Chat with your repository using natural language
+- Context-aware responses powered by RAG (Retrieval-Augmented Generation)
+- Reference tracking showing which files informed each answer
 
-### Frontend
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS + Shadcn UI
-- **Animation**: Framer Motion
-- **State Management**: Zustand
+### 📝 **Meeting Integration**
+- Upload meeting recordings for automatic transcription
+- AI-generated meeting summaries with key issues and timestamps
+- Convert discussions into actionable insights
 
-### Backend
-- **Database**: PostgreSQL (NeonDB)
+### 👥 **Collaboration**
+- Invite team members to collaborate on projects
+- Shared access to repository insights and Q&A history
+- Saved questions and answers for team knowledge sharing
+
+## Technology Stack
+
+- **Frontend**: Next.js
+- **AI/ML**: Gemini AI, LangChain, Hugging Face
+- **Database**: PostgreSQL (Neon) with vector embeddings
+- **Storage**: Cloudinary
+- **Audio Processing**: Assembly.AI
+- **Payment**: Stripe integration
 - **ORM**: Prisma
-- **Auth**: NextAuth
-- **Video**: GetStream SDK
 
-### Infrastructure
-- **Deployment**: Vercel
-- **CI/CD**: GitHub Actions
-- **Database Hosting**: Neon.tech
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18+
-- PostgreSQL database (NeonDB recommended)
-- Google OAuth credentials
-- GetStream account
+- PostgreSQL database
+- GitHub personal access token
 
 ### Installation
-```bash
-# Clone repository
-git clone https://github.com/yourusername/devrooms.git
-cd devrooms
 
-# Install dependencies
-npm install
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/reposense.git
+   cd reposense
+   ```
 
-# Set up environment variables
-cp .env.example .env.local
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-# Run development server
-npm run dev
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Configure the following variables:
+   ```env
+   DATABASE_URL=your_postgresql_connection_string
+   GEMINI_API_KEY=your_gemini_api_key
+   GITHUB_TOKEN=your_github_token
+   CLOUDINARY_URL=your_cloudinary_url
+   ASSEMBLY_AI_KEY=your_assembly_ai_key
+   STRIPE_SECRET_KEY=your_stripe_secret_key
+   ```
+
+4. **Set up the database**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
+
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+## Usage
+
+### Analyzing a Repository
+
+1. **Add Repository**: Paste your GitHub repository URL
+2. **Processing**: AI analyzes and summarizes important files
+3. **Explore**: View commit summaries and file insights
+4. **Chat**: Ask questions about your codebase
+
+### Meeting Analysis
+
+1. **Upload Audio**: Add meeting recordings (supported formats: MP3, WAV, MP4)
+2. **Processing**: Automatic transcription and AI analysis
+3. **Review**: Access timestamped summaries and key issues
+
+## Pricing
+
+- **Free Tier**: 150 credits included
+- **Additional Credits**: $0.20 per 10 credits
+- **Usage**: 1 credit per file summary
+
+## API Rate Limits
+
+⚠️ **Important**: This project uses Gemini's free tier API, which may hit rate limits for larger repositories. For production use, consider upgrading to a paid API plan.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

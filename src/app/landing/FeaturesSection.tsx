@@ -3,7 +3,7 @@
 export default function FeaturesSection() {
   return (
     <>
-      {/* Core Features Section */}
+     
       <section className="py-24 px-6 md:px-12 bg-surface-container-low">
         <div className="max-w-7xl mx-auto">
           <div className="mb-16">
@@ -11,7 +11,7 @@ export default function FeaturesSection() {
             <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter text-on-surface">Engineered for Collaboration.</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-1">
-            {/* Feature 1 */}
+            
             <div className="bg-surface-container-high p-8 ghost-border hover:bg-surface-container-highest transition-colors group text-on-surface">
               <div className="w-12 h-12 flex items-center justify-center bg-primary text-on-primary mb-6 transition-transform group-hover:scale-110">
                 <span className="material-symbols-outlined text-2xl">search_insights</span>
@@ -26,7 +26,7 @@ export default function FeaturesSection() {
                 <span className="w-2 h-2 bg-outline-variant"></span>
               </div>
             </div>
-            {/* Feature 2 */}
+            
             <div className="bg-surface-container-high p-8 ghost-border hover:bg-surface-container-highest transition-colors group text-on-surface">
               <div className="w-12 h-12 flex items-center justify-center bg-primary text-on-primary mb-6 transition-transform group-hover:scale-110">
                 <span className="material-symbols-outlined text-2xl">hub</span>
@@ -41,7 +41,7 @@ export default function FeaturesSection() {
                 <span className="w-2 h-2 bg-outline-variant"></span>
               </div>
             </div>
-            {/* Feature 3 */}
+          
             <div className="bg-surface-container-high p-8 ghost-border hover:bg-surface-container-highest transition-colors group text-on-surface">
               <div className="w-12 h-12 flex items-center justify-center bg-primary text-on-primary mb-6 transition-transform group-hover:scale-110">
                 <span className="material-symbols-outlined text-2xl">settings_input_component</span>
@@ -60,14 +60,14 @@ export default function FeaturesSection() {
         </div>
       </section>
 
-      {/* How It Works Section */}
+   
       <section className="py-24 px-6 md:px-12 bg-surface">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20 text-on-surface">
             <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight uppercase">Implementation Protocol</h2>
           </div>
           <div className="grid md:grid-cols-4 gap-0 ghost-border text-on-surface">
-            {/* Step 1 */}
+            
             <div className="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
               <div className="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">01</div>
               <h4 className="font-label text-xs tracking-widest text-primary mb-4">AUTHENTICATION</h4>
@@ -77,7 +77,7 @@ export default function FeaturesSection() {
                 <div className="absolute inset-0 bg-primary/40 w-1/4"></div>
               </div>
             </div>
-            {/* Step 2 */}
+          
             <div className="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
               <div className="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">02</div>
               <h4 className="font-label text-xs tracking-widest text-primary mb-4">DISCOVERY</h4>
@@ -87,7 +87,7 @@ export default function FeaturesSection() {
                 <div className="absolute inset-0 bg-primary/40 w-2/4"></div>
               </div>
             </div>
-            {/* Step 3 */}
+           
             <div className="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
               <div className="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">03</div>
               <h4 className="font-label text-xs tracking-widest text-primary mb-4">INITIATION</h4>
@@ -97,7 +97,7 @@ export default function FeaturesSection() {
                 <div className="absolute inset-0 bg-primary/40 w-3/4"></div>
               </div>
             </div>
-            {/* Step 4 */}
+            
             <div className="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
               <div className="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">04</div>
               <h4 className="font-label text-xs tracking-widest text-primary mb-4">REAL-TIME</h4>

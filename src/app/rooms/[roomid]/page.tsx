@@ -9,11 +9,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
-export default async function RoomPage(props: { params: { roomid: string } }) {
+export default async function RoomPage(props: { params: Promise<{ roomid: string }> }) {
   unstable_noStore();
   const session = await getServerSession(authOptions);
   
-  const roomid = props.params.roomid;
+  const { roomid } = await props.params;
 
   if (!session) {
     redirect(`/api/auth/signin?callbackUrl=/rooms/${roomid}`);

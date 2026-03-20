@@ -30,8 +30,8 @@ export default function FAQSection() {
     <section className="py-24 px-6 md:px-12 bg-surface-container-low border-t border-outline-variant/10">
       <div className="max-w-4xl mx-auto">
         <div className="mb-16 text-center">
-          <span className="font-label text-xs uppercase tracking-[0.3em] text-primary block mb-2">Technical FAQ</span>
-          <h2 className="font-headline text-4xl font-bold tracking-tighter">System Documentation</h2>
+          
+          <h2 className="font-headline text-4xl font-bold tracking-tighter"><span className="font-label  uppercase  text-primary block mb-2">FAQ</span></h2>
         </div>
         
         <div className="space-y-4">

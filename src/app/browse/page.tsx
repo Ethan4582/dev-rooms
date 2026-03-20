@@ -12,19 +12,20 @@ import { TopicFilters } from "@/components/TopicFilters";
 export default async function BrowsePage({
   searchParams,
 }: {
-  searchParams: Record<string, string | string[] | undefined>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   unstable_noStore();
 
   const session = await getServerSession(authOptions);
+  const resolvedParams = await searchParams;
 
-  const search = Array.isArray(searchParams.search)
-    ? searchParams.search[0]
-    : searchParams.search;
+  const search = Array.isArray(resolvedParams.search)
+    ? resolvedParams.search[0]
+    : resolvedParams.search;
   
-  const tag = Array.isArray(searchParams.tag)
-    ? searchParams.tag[0]
-    : searchParams.tag;
+  const tag = Array.isArray(resolvedParams.tag)
+    ? resolvedParams.tag[0]
+    : resolvedParams.tag;
   
   // Calculate tag counts for "top used" logic
   const allRooms = await getRooms();

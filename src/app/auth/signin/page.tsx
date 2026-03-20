@@ -5,16 +5,13 @@ import { signIn } from "next-auth/react";
 import { MoveRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 
-/**
- * Custom Sign-in Page for DevFinder
- * Redesigned to feel like a premium developer collaboration platform.
- */
+
 export default function SigninPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-background text-foreground relative overflow-hidden font-body selection:bg-primary selection:text-primary-foreground">
-      {/* Background Grid & Glows - Creating depth and a "tech" atmosphere */}
+    
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
         <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-primary/20 blur-[120px] animate-pulse" />

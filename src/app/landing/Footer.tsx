@@ -18,12 +18,7 @@ export default function Footer() {
           </Link>
         </div>
       </div>
-      <div className="flex gap-8">
-        <Link className="text-gray-500 hover:text-[#4edea3] transition-colors font-headline text-xs uppercase tracking-widest opacity-80 hover:opacity-100" href="#">Documentation</Link>
-        <Link className="text-gray-500 hover:text-[#4edea3] transition-colors font-headline text-xs uppercase tracking-widest opacity-80 hover:opacity-100" href="#">Changelog</Link>
-        <Link className="text-gray-500 hover:text-[#4edea3] transition-colors font-headline text-xs uppercase tracking-widest opacity-80 hover:opacity-100" href="#">Status</Link>
-        <Link className="text-gray-500 hover:text-[#4edea3] transition-colors font-headline text-xs uppercase tracking-widest opacity-80 hover:opacity-100" href="#">Privacy</Link>
-      </div>
+      
     </footer>
   );
 }

@@ -87,7 +87,7 @@ export function DevfinderVideo({ room }: { room: Room }) {
       }
     };
 
-  }, [session, room]);
+  }, [session?.user?.id, room?.id]);
 
   const handleLeave = async () => {
     setLeaving(true);
@@ -103,7 +103,9 @@ export function DevfinderVideo({ room }: { room: Room }) {
       console.error("Error during leave:", error);
     }
 
-    router.push("/browse");
+    if (typeof window !== "undefined") {
+      window.location.href = "/browse";
+    }
   };
 
 
