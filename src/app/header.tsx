@@ -107,11 +107,13 @@ export function Header({ className, showSearch = false }: { className?: string; 
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    const params = new URLSearchParams(searchParams.toString());
     if (searchValue) {
-      router.push(`/browse?search=${searchValue}`);
+      params.set("search", searchValue);
     } else {
-      router.push("/browse");
+      params.delete("search");
     }
+    router.push(`/browse?${params.toString()}`);
   };
 
   return (
@@ -154,8 +156,16 @@ export function Header({ className, showSearch = false }: { className?: string; 
             <input
               type="text"
               value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="SEARCH_ACTIVE_ROOM..."
+              onChange={(e) => {
+                const val = e.target.value;
+                setSearchValue(val);
+                if (val === "") {
+                  const params = new URLSearchParams(searchParams.toString());
+                  params.delete("search");
+                  router.push(`/browse?${params.toString()}`);
+                }
+              }}
+              placeholder="SEARCH_ACTIVE_..."
               className="w-full bg-surface-container-highest border border-outline-variant/20 px-10 py-2.5 text-[10px] tracking-widest focus:outline-none focus:border-primary/50 text-on-surface uppercase"
             />
           </form>

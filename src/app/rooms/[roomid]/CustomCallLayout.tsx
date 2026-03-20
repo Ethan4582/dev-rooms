@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
 
-export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () => void }) {
+export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () => Promise<void> }) {
   const { data: session } = useSession();
   const { 
     useParticipants, 
@@ -88,7 +88,7 @@ export function CustomCallLayout({ room, onLeave }: { room: Room, onLeave: () =>
     } catch(e) {
       console.error(e);
     }
-    onLeave();
+    await onLeave();
   };
 
   const handleMuteUser = async (pId: string) => {

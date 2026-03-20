@@ -104,7 +104,7 @@ export function DevfinderVideo({ room }: { room: Room }) {
   };
 
 
-  if (loading || leaving || !client || !call) {
+  if (loading || !client || !call) {
     return (
       <div className="flex items-center justify-center h-full min-h-[50vh] bg-surface-dim">
         <Loader />
@@ -116,7 +116,13 @@ export function DevfinderVideo({ room }: { room: Room }) {
     <StreamVideo client={client}>
       <StreamTheme>
         <StreamCall call={call}>
-          <CustomCallLayout room={room} onLeave={handleLeave} />
+          {leaving ? (
+            <div className="flex items-center justify-center h-screen w-full bg-surface-dim">
+              <Loader />
+            </div>
+          ) : (
+            <CustomCallLayout room={room} onLeave={handleLeave} />
+          )}
         </StreamCall>
       </StreamTheme>
     </StreamVideo>
