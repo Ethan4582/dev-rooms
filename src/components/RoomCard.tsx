@@ -18,74 +18,78 @@ export function RoomCard({ room, isOwner, onDelete, onEdit }: RoomCardProps) {
     .map((lang: string) => lang.trim());
 
   return (
-    <div className="bg-surface-container-low border-r border-b border-outline-variant/20 p-6 flex flex-col group hover:bg-surface-container-high transition-colors">
-      <div className="flex justify-between items-start mb-4">
-        <h3 className="font-headline font-bold text-lg tracking-tight group-hover:text-primary transition-colors uppercase">
+    <div className="bg-surface-dim border border-outline-variant/10 p-8 flex flex-col group hover:bg-[#121212] transition-all duration-300 relative overflow-hidden">
+      {/* Card Header: Name and Active Count */}
+      <div className="flex justify-between items-start mb-6 gap-4">
+        <h3 className="font-headline font-bold text-2xl tracking-tight text-on-surface group-hover:text-primary transition-colors leading-tight">
           {String(room.name ?? "Untitled Room")}
         </h3>
-        <div className="flex items-center gap-1 bg-primary/10 px-2 py-1">
-          <User className="w-3 h-3 text-primary" />
-          <span className="text-[10px] font-label font-bold text-primary">12</span>
+        <div className="flex items-center gap-2 bg-[#004a31]/20 px-3 py-1.5 border border-[#004a31]/30 shrink-0">
+          <User className="w-3.5 h-3.5 text-primary" />
+          <span className="font-label text-xs font-bold text-primary">12</span>
         </div>
       </div>
-      
-      <p className="text-on-surface-variant text-sm mb-6 flex-1 font-body leading-relaxed line-clamp-3">
-        {String(room.description ?? "No description provided.")}
-      </p>
 
-      <div className="flex flex-wrap gap-2 mb-6">
-        {languages.map((tag, i) => (
-          <span 
-            key={i} 
-            className="text-[9px] font-label px-2 py-0.5 bg-surface-container-highest border border-outline-variant/20 uppercase tracking-wider text-on-surface"
-          >
-            #{tag}
-          </span>
-        ))}
+      <div className="flex-1">
+        <p className="text-on-surface-variant/80 text-base mb-8 font-body leading-relaxed line-clamp-3">
+          {String(room.description ?? "No description provided.")}
+        </p>
+
+        <div className="flex flex-wrap gap-2 mb-10">
+          {languages.map((tag, i) => (
+            <span 
+              key={i} 
+              className="px-3 py-1 bg-[#1a1a1a] border border-outline-variant/10 text-[10px] font-mono text-outline uppercase tracking-wider hover:text-primary transition-colors cursor-default"
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
       </div>
 
-      <div className="flex flex-col gap-3">
-        <div className="flex items-center gap-3">
-          <Link 
-            href={`/rooms/${room.id}`}
-            className="flex-1 emerald-gradient text-on-primary font-label font-bold py-3 text-[10px] uppercase tracking-widest text-center transition-all active:scale-95 flex items-center justify-center gap-2"
-          >
-            Join Room
-            <Rocket className="w-3 h-3" />
-          </Link>
-          
+      {/* Footer: Join Button and Actions/GitHub */}
+      <div className="flex items-center gap-3 pt-6">
+        <Link 
+          href={`/rooms/${room.id}`}
+          className="flex-1 emerald-gradient text-[#004a31] font-label font-black py-4 text-xs uppercase tracking-[0.2em] text-center transition-all active:scale-95 shadow-[0_4px_15px_rgba(78,222,163,0.1)] hover:shadow-[0_4px_25px_rgba(78,222,163,0.2)]"
+        >
+          Join Room
+        </Link>
+        
+        <div className="flex gap-2">
           {room.githubRepo && (
             <Link 
               href={String(room.githubRepo)}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 border border-outline-variant/40 hover:border-primary/60 transition-colors bg-surface-container-highest"
+              className="p-4 bg-[#1a1a1a] border border-outline-variant/20 hover:border-primary/40 transition-colors group/repo"
             >
-              <GithubIcon className="w-4 h-4 text-on-surface-variant opacity-70 group-hover:opacity-100" />
+              <GithubIcon className="w-5 h-5 text-on-surface-variant opacity-60 group-hover/repo:opacity-100 group-hover/repo:text-primary transition-all" />
             </Link>
           )}
+
+          {isOwner && (
+            <div className="flex gap-1">
+              <button 
+                onClick={() => onEdit?.(room)}
+                className="p-4 bg-[#1a1a1a] border border-outline-variant/20 hover:border-primary/40 transition-colors group/edit"
+                title="Edit Node"
+              >
+                <Edit2 className="w-4 h-4 text-outline/40 group-hover/edit:text-primary transition-colors" />
+              </button>
+              <button 
+                onClick={() => onDelete?.(String(room.id))}
+                className="p-4 bg-[#1a1a1a] border border-outline-variant/20 hover:border-error/40 transition-colors group/delete"
+                title="Decommission Node"
+              >
+                <Trash2 className="w-4 h-4 text-outline/40 group-hover/delete:text-error transition-colors" />
+              </button>
+            </div>
+          )}
         </div>
-
-        {isOwner && (
-          <div className="flex gap-2 pt-2 border-t border-outline-variant/10">
-            <button 
-              onClick={() => onEdit?.(room)}
-              className="flex-1 border border-primary/20 hover:bg-primary/5 text-primary py-2 text-[9px] font-label uppercase tracking-widest flex items-center justify-center gap-2"
-            >
-              <Edit2 className="w-3 h-3" />
-              Edit
-            </button>
-            <button 
-              onClick={() => onDelete?.(String(room.id))}
-              className="px-4 border border-error/20 hover:bg-error/5 text-error py-2 text-[9px] font-label uppercase tracking-widest flex items-center justify-center gap-2"
-            >
-              <Trash2 className="w-3 h-3" />
-              Delete
-            </button>
-          </div>
-        )}
-
       </div>
     </div>
   );
 }
+
+

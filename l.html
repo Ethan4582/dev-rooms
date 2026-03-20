@@ -5,7 +5,6 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -90,6 +89,7 @@
         ::-webkit-scrollbar-track { background: #0e0e0e; }
         ::-webkit-scrollbar-thumb { background: #1f2020; }
         ::-webkit-scrollbar-thumb:hover { background: #4edea3; }
+        details > summary::-webkit-details-marker { display: none; }
     </style>
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
@@ -117,11 +117,11 @@
 <span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">System Status: Operational</span>
 </div>
 <h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter leading-none text-on-surface">
-                        Find your next <span class="text-primary">pair-programming</span> partner.
-                    </h1>
+                    Find your next <span class="text-primary">pair-programming</span> partner.
+                </h1>
 <p class="text-on-surface-variant text-lg md:text-xl max-w-xl leading-relaxed border-l-2 border-primary/20 pl-6">
-                        The architectural core for real-time remote collaboration. Discover, create, and join coding rooms instantly.
-                    </p>
+                    A lightweight platform for real-time collaboration. Connect via audio, video, and screen sharing to solve complex problems together.
+                </p>
 <div class="flex flex-wrap gap-4 mt-4">
 <button class="emerald-gradient text-on-primary font-bold px-8 py-4 flex items-center gap-2 transition-all active:scale-95">
 <span class="font-label uppercase tracking-widest">Browse Rooms</span>
@@ -146,7 +146,7 @@
 <div class="space-y-3">
 <div class="flex items-start gap-3 bg-surface-container p-2">
 <div class="w-8 h-8 bg-primary/20 flex items-center justify-center text-primary ghost-border">
-<span class="material-symbols-outlined text-sm">code</span>
+<span class="material-symbols-outlined text-sm">video_chat</span>
 </div>
 <div>
 <div class="text-primary font-bold">Refactor/Auth_Module</div>
@@ -160,7 +160,7 @@
 <div class="text-on-surface-variant/40 pl-2">-- fetching active_sessions...</div>
 <div class="flex items-start gap-3 bg-surface-container p-2">
 <div class="w-8 h-8 bg-tertiary/20 flex items-center justify-center text-tertiary ghost-border">
-<span class="material-symbols-outlined text-sm">terminal</span>
+<span class="material-symbols-outlined text-sm">screen_share</span>
 </div>
 <div>
 <div class="text-tertiary font-bold">Kernel_Optimization</div>
@@ -183,7 +183,7 @@
 <div class="max-w-7xl mx-auto">
 <div class="mb-16">
 <span class="font-label text-xs uppercase tracking-[0.3em] text-primary block mb-2">Technical Capabilities</span>
-<h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Engineered for Performance.</h2>
+<h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Engineered for Collaboration.</h2>
 </div>
 <div class="grid md:grid-cols-3 gap-1">
 <!-- Feature 1 -->
@@ -193,8 +193,8 @@
 </div>
 <h3 class="font-headline text-xl font-bold mb-4">Discovery Hub</h3>
 <p class="text-on-surface-variant leading-relaxed text-sm">
-                            Search and filter rooms by technology tags. Our high-density indexing ensures you find the exact stack match in milliseconds.
-                        </p>
+                        Search and filter collaboration rooms by technology tags. Connect with developers working on the same stack in real-time.
+                    </p>
 <div class="mt-8 pt-8 border-t border-outline-variant/20 flex gap-2">
 <span class="w-2 h-2 bg-primary"></span>
 <span class="w-2 h-2 bg-outline-variant"></span>
@@ -206,10 +206,10 @@
 <div class="w-12 h-12 flex items-center justify-center bg-primary text-on-primary mb-6 transition-transform group-hover:scale-110">
 <span class="material-symbols-outlined text-2xl">hub</span>
 </div>
-<h3 class="font-headline text-xl font-bold mb-4">Seamless Collaboration</h3>
+<h3 class="font-headline text-xl font-bold mb-4">Meeting Space</h3>
 <p class="text-on-surface-variant leading-relaxed text-sm">
-                            Real-time video/audio, screen sharing, and participant presence. Sub-50ms latency for a true pair-programming experience.
-                        </p>
+                        Integrated video, audio, and high-fidelity screen sharing. Designed as a dedicated space for focused technical discussions.
+                    </p>
 <div class="mt-8 pt-8 border-t border-outline-variant/20 flex gap-2">
 <span class="w-2 h-2 bg-primary"></span>
 <span class="w-2 h-2 bg-primary"></span>
@@ -221,10 +221,10 @@
 <div class="w-12 h-12 flex items-center justify-center bg-primary text-on-primary mb-6 transition-transform group-hover:scale-110">
 <span class="material-symbols-outlined text-2xl">settings_input_component</span>
 </div>
-<h3 class="font-headline text-xl font-bold mb-4">Room Management</h3>
+<h3 class="font-headline text-xl font-bold mb-4">Room Ownership</h3>
 <p class="text-on-surface-variant leading-relaxed text-sm">
-                            Create and edit rooms with GitHub repository integration and custom tags. Full ownership of your development environment.
-                        </p>
+                        Create, edit, and delete your own rooms. Link GitHub repositories to provide context for your pair-programming session.
+                    </p>
 <div class="mt-8 pt-8 border-t border-outline-variant/20 flex gap-2">
 <span class="w-2 h-2 bg-primary"></span>
 <span class="w-2 h-2 bg-primary"></span>
@@ -245,8 +245,8 @@
 <div class="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
 <div class="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">01</div>
 <h4 class="font-label text-xs tracking-widest text-primary mb-4">AUTHENTICATION</h4>
-<h3 class="font-headline text-lg font-bold mb-4">Sign In</h3>
-<p class="text-on-surface-variant text-sm">Secure OAuth integration via GitHub. Connect your development identity instantly.</p>
+<h3 class="font-headline text-lg font-bold mb-4">GitHub OAuth</h3>
+<p class="text-on-surface-variant text-sm">Secure identity verification via GitHub. Establish your developer profile instantly.</p>
 <div class="mt-12 h-1 bg-surface-container-high relative overflow-hidden">
 <div class="absolute inset-0 bg-primary/40 w-1/4"></div>
 </div>
@@ -255,8 +255,8 @@
 <div class="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
 <div class="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">02</div>
 <h4 class="font-label text-xs tracking-widest text-primary mb-4">DISCOVERY</h4>
-<h3 class="font-headline text-lg font-bold mb-4">Browse Rooms</h3>
-<p class="text-on-surface-variant text-sm">Explore the live grid of active coding sessions filtered by your preferred stack.</p>
+<h3 class="font-headline text-lg font-bold mb-4">Filter Rooms</h3>
+<p class="text-on-surface-variant text-sm">Search the active grid using technology keywords or specific repository tags.</p>
 <div class="mt-12 h-1 bg-surface-container-high relative overflow-hidden">
 <div class="absolute inset-0 bg-primary/40 w-2/4"></div>
 </div>
@@ -264,9 +264,9 @@
 <!-- Step 3 -->
 <div class="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
 <div class="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">03</div>
-<h4 class="font-label text-xs tracking-widest text-primary mb-4">ACTION</h4>
-<h3 class="font-headline text-lg font-bold mb-4">Join or Create</h3>
-<p class="text-on-surface-variant text-sm">Jump into an existing thread or deploy your own private room for focused pair work.</p>
+<h4 class="font-label text-xs tracking-widest text-primary mb-4">INITIATION</h4>
+<h3 class="font-headline text-lg font-bold mb-4">Join or Host</h3>
+<p class="text-on-surface-variant text-sm">Jump into a live thread or create a new room to host your own collaboration session.</p>
 <div class="mt-12 h-1 bg-surface-container-high relative overflow-hidden">
 <div class="absolute inset-0 bg-primary/40 w-3/4"></div>
 </div>
@@ -276,11 +276,67 @@
 <div class="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">04</div>
 <h4 class="font-label text-xs tracking-widest text-primary mb-4">REAL-TIME</h4>
 <h3 class="font-headline text-lg font-bold mb-4">Collaborate</h3>
-<p class="text-on-surface-variant text-sm">Synchronize your workflow. Share code, audio, and video in a specialized shell environment.</p>
+<p class="text-on-surface-variant text-sm">Engage via low-latency audio/video and screen sharing. Use your local IDE of choice.</p>
 <div class="mt-12 h-1 bg-surface-container-high relative overflow-hidden">
 <div class="absolute inset-0 bg-primary w-full"></div>
 </div>
 </div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-24 px-6 md:px-12 bg-surface-container-low border-t border-outline-variant/10">
+<div class="max-w-4xl mx-auto">
+<div class="mb-16 text-center">
+<span class="font-label text-xs uppercase tracking-[0.3em] text-primary block mb-2">Technical FAQ</span>
+<h2 class="font-headline text-4xl font-bold tracking-tighter">System Documentation</h2>
+</div>
+<div class="space-y-4">
+<details class="group bg-surface-container-high ghost-border p-6 cursor-pointer">
+<summary class="flex items-center justify-between list-none">
+<h3 class="font-headline text-lg font-bold text-on-surface">What is DevFinder?</h3>
+<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-4 text-on-surface-variant text-sm leading-relaxed border-t border-outline-variant/20 pt-4">
+                        DevFinder is a lightweight platform specifically engineered for discovering and joining developer collaboration rooms. It facilitates peer-to-peer technical knowledge transfer through a streamlined interface.
+                    </div>
+</details>
+<details class="group bg-surface-container-high ghost-border p-6 cursor-pointer">
+<summary class="flex items-center justify-between list-none">
+<h3 class="font-headline text-lg font-bold text-on-surface">Is there an integrated IDE?</h3>
+<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-4 text-on-surface-variant text-sm leading-relaxed border-t border-outline-variant/20 pt-4">
+                        No. DevFinder is a dedicated collaboration space providing high-quality video, audio, and screen sharing capabilities. We believe developers work best in their own local environments, so we focus on the meeting layer rather than providing a browser-based IDE.
+                    </div>
+</details>
+<details class="group bg-surface-container-high ghost-border p-6 cursor-pointer">
+<summary class="flex items-center justify-between list-none">
+<h3 class="font-headline text-lg font-bold text-on-surface">How do I join a room?</h3>
+<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-4 text-on-surface-variant text-sm leading-relaxed border-t border-outline-variant/20 pt-4">
+                        Browse the active grid on the homepage. You can filter by technology tags (e.g., React, Go, Docker) or use keywords. Once you find a room that matches your interest, click "Join" to enter the session instantly.
+                    </div>
+</details>
+<details class="group bg-surface-container-high ghost-border p-6 cursor-pointer">
+<summary class="flex items-center justify-between list-none">
+<h3 class="font-headline text-lg font-bold text-on-surface">Can I manage my own rooms?</h3>
+<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-4 text-on-surface-variant text-sm leading-relaxed border-t border-outline-variant/20 pt-4">
+                        Yes. Authorized users have full control over their sessions. You can create new rooms, edit existing room metadata (like tags and descriptions), and delete rooms once the session is complete.
+                    </div>
+</details>
+<details class="group bg-surface-container-high ghost-border p-6 cursor-pointer">
+<summary class="flex items-center justify-between list-none">
+<h3 class="font-headline text-lg font-bold text-on-surface">Does it integrate with GitHub?</h3>
+<span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-4 text-on-surface-variant text-sm leading-relaxed border-t border-outline-variant/20 pt-4">
+                        Yes. When creating a room, you can link a specific GitHub repository. This helps other developers understand the context of the session and review the codebase before joining.
+                    </div>
+</details>
 </div>
 </div>
 </section>
@@ -298,8 +354,8 @@
 <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">rocket_launch</span>
 </button>
 <button class="bg-surface text-on-surface ghost-border px-10 py-5 transition-all hover:bg-surface-container-high active:scale-95 font-label uppercase tracking-[0.2em]">
-                        Sign Up Now
-                    </button>
+                    Sign Up Now
+                </button>
 </div>
 <div class="mt-12 flex justify-center gap-8 text-on-surface-variant font-mono text-[10px] uppercase tracking-widest opacity-60">
 <span>Direct Access</span>

@@ -10,8 +10,8 @@ import {
   Settings, 
   HelpCircle, 
   LogOut,
-  Terminal,
-  Plus
+  Plus,
+  PanelLeftClose
 } from "lucide-react";
 
 const sidebarLinks = [
@@ -21,22 +21,25 @@ const sidebarLinks = [
   { name: "Settings", href: "/settings", icon: Settings },
 ];
 
-export function Sidebar() {
+export function Sidebar({ onToggle }: { onToggle?: () => void }) {
   const pathname = usePathname();
   const { data: session } = useSession();
 
   return (
     <aside className="hidden md:flex flex-col h-full w-64 bg-[#000000] border-r border-outline-variant/20 py-6 shrink-0 font-headline">
-      <div className="px-6 mb-8">
+      <div className="px-6 mb-8 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-primary-container flex items-center justify-center">
-            <Terminal className="text-primary h-5 w-5" />
-          </div>
-          <div>
-            <h1 className="text-primary font-black text-lg tracking-tight leading-none">Terminal_V1</h1>
-            <p className="text-[10px] text-outline font-label uppercase tracking-widest mt-1">v0.8.2-beta</p>
-          </div>
+          <h1 className="text-primary font-black text-lg tracking-tight leading-none">DEV_FINDER</h1>
         </div>
+        {onToggle && (
+          <button 
+            onClick={onToggle}
+            className="text-outline-variant hover:text-primary transition-colors p-1"
+            title="Close Sidebar (Ctrl + B)"
+          >
+            <PanelLeftClose size={18} />
+          </button>
+        )}
       </div>
 
       <nav className="flex-1 px-3 space-y-1">
@@ -78,8 +81,8 @@ export function Sidebar() {
           href="/help"
           className="flex items-center gap-3 px-3 py-2 text-outline hover:bg-surface-container-low/50 hover:text-white transition-colors text-sm tracking-tight"
         >
-          <HelpCircle className="h-4 w-4" />
-          Help
+        
+         
         </Link>
         <button 
           onClick={() => signOut({ callbackUrl: "/" })}
@@ -93,7 +96,7 @@ export function Sidebar() {
       {session?.user && (
         <div className="px-6 mt-4 pt-4 border-t border-outline-variant/10">
           <div className="flex items-center gap-3">
-             <div className="w-8 h-8 rounded-full overflow-hidden ghost-border">
+             <div className="w-8 h-8 ghost-border overflow-hidden">
                 <img src={session.user.image ?? ""} alt={session.user.name ?? ""} className="w-full h-full object-cover" />
              </div>
              <div className="overflow-hidden">

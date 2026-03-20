@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
-import { Provider } from "@/app/provider";
-import { Header } from"./header";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Provider } from "./provider";
 import { Toaster } from "@/components/ui/sonner"
 
 const spaceGrotesk = Space_Grotesk({
@@ -28,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
       </head>
@@ -36,15 +34,8 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <Provider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NextTopLoader />
-            {children}
-          </ThemeProvider>
+          <NextTopLoader />
+          {children}
         </Provider>
         <Toaster richColors position="top-right" />
       </body>

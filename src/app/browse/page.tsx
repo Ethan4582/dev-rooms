@@ -5,6 +5,9 @@ import Image from "next/image";
 import { DashboardShell } from "@/components/DashboardShell";
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { TopicFilters } from "@/components/TopicFilters";
 
 export default async function BrowsePage({
   searchParams,
@@ -13,32 +16,48 @@ export default async function BrowsePage({
 }) {
   unstable_noStore();
 
+  const session = await getServerSession(authOptions);
+
   const search = Array.isArray(searchParams.search)
     ? searchParams.search[0]
     : searchParams.search;
   
-  const rooms = await getRooms(search);
+  const tag = Array.isArray(searchParams.tag)
+    ? searchParams.tag[0]
+    : searchParams.tag;
+  
+  // To get the full list of tags based on existing data
+  const allRooms = await getRooms();
+  const allTags = Array.from(new Set(allRooms.flatMap(r => 
+    String(r.language).split(",").map(t => t.trim()).filter(t => t.length > 0)
+  ))).sort();
 
-  const actions = (
+  // Get filtered rooms
+  const rooms = await getRooms(search as string, tag as string);
+
+  const actions = session ? (
     <Link 
       href="/create-room"
-      className="bg-surface-container-highest border border-primary/40 text-primary px-6 py-3 font-label font-bold text-xs uppercase tracking-[0.2em] hover:bg-primary/10 transition-all flex items-center gap-2 active:scale-95"
+      className="bg-primary text-on-primary border border-primary px-6 py-4 font-label font-bold text-xs uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(78,222,163,0.2)] hover:shadow-[0_0_30px_rgba(78,222,163,0.4)] transition-all flex items-center gap-2 active:scale-95"
     >
-      <Plus className="h-4 w-4" />
+      <Plus className="h-5 w-5" />
       Initialize_New_Room
     </Link>
-  );
+  ) : null;
 
   return (
     <DashboardShell 
-      title="Active Rooms" 
-      description="System operational // 1,402 clusters active"
+      title="Active Grid" 
+      description={`System operational // ${rooms.length} nodes online`}
       actions={actions}
+      requireAuth={false}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-outline-variant/20">
+      <TopicFilters tags={allTags} />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-700">
         {rooms.length === 0 ? (
-          <div className="col-span-full py-20 border-r border-b border-outline-variant/20 flex flex-col items-center justify-center text-center bg-surface-container-low/50">
-            <div className="w-24 h-24 mb-6 opacity-20 grayscale grayscale-100">
+          <div className="col-span-full py-40 border border-outline-variant/10 flex flex-col items-center justify-center text-center bg-surface-dim shadow-inner">
+            <div className="w-24 h-24 mb-8 grayscale opacity-10">
                <Image
                  src="/no-data_.svg"
                  alt="No rooms found"
@@ -46,8 +65,9 @@ export default async function BrowsePage({
                  height={200}
                />
             </div>
-            <p className="font-headline text-on-surface-variant uppercase tracking-widest text-sm">No Active Nodes Found</p>
-            <p className="text-outline text-xs mt-2">Initialize a new room to start collaborating</p>
+            <p className="font-headline text-on-surface uppercase tracking-[0.4em] text-sm font-black mb-2 opacity-50">Filter_Mismatch</p>
+            <p className="text-outline text-xs tracking-widest uppercase opacity-40">No active nodes match current parameters</p>
+            <Link href="/browse" className="mt-8 text-primary font-label text-[10px] uppercase tracking-widest border-b border-primary/20 hover:border-primary transition-colors"> Reset All Filters </Link>
           </div>
         ) : (
           rooms.map((room) => (

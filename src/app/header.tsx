@@ -7,11 +7,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { ModeToggle } from "@/components/mode-toggle";
 import { signIn, signOut, useSession } from "next-auth/react";
-
-import { DeleteIcon, LogOutIcon, Search, User } from "lucide-react";
-
+import { DeleteIcon, LogOutIcon, Search, User as UserIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
@@ -61,9 +58,9 @@ function AccountDropdown() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <Avatar className="h-8 w-8 ghost-border">
+            <Avatar className="h-8 w-8 ghost-border rounded-none">
               <AvatarImage src={session.data?.user?.image ?? ""} />
-              <AvatarFallback><User /></AvatarFallback>
+              <AvatarFallback><UserIcon /></AvatarFallback>
             </Avatar>
           </button>
         </DropdownMenuTrigger>
@@ -94,6 +91,9 @@ export function Header({ className, showSearch = false }: { className?: string; 
   const searchParams = useSearchParams();
   const [searchValue, setSearchValue] = useState(searchParams.get("search") ?? "");
 
+  const isHomePage = pathname === "/";
+  const isLoggedIn = !!session;
+
   useEffect(() => {
     setSearchValue(searchParams.get("search") ?? "");
   }, [searchParams]);
@@ -110,9 +110,11 @@ export function Header({ className, showSearch = false }: { className?: string; 
   return (
     <nav className={`flex justify-between items-center w-full px-8 py-4 bg-surface border-b border-outline-variant/10 z-50 ${className}`}>
       <div className="flex items-center gap-8">
-        <Link href="/" className="text-xl font-black tracking-tighter text-primary font-headline uppercase leading-none">
-          DevFinder
-        </Link>
+        {isHomePage && (
+          <Link href="/" className="text-xl font-black tracking-tighter text-primary font-headline uppercase leading-none">
+            DevFinder
+          </Link>
+        )}
         <nav className="hidden md:flex items-center gap-6">
           <Link
             href="/browse"
@@ -120,16 +122,18 @@ export function Header({ className, showSearch = false }: { className?: string; 
               pathname === "/browse" ? "text-primary border-b-2 border-primary" : "text-outline hover:text-on-surface"
             }`}
           >
-            Browse
+            Rooms
           </Link>
-          <Link
-            href="/your-rooms"
-            className={`font-label uppercase tracking-[0.2em] text-[10px] transition-colors pb-1 ${
-              pathname === "/your-rooms" ? "text-primary border-b-2 border-primary" : "text-outline hover:text-on-surface"
-            }`}
-          >
-            Your Rooms
-          </Link>
+          {isLoggedIn && (
+            <Link
+              href="/your-rooms"
+              className={`font-label uppercase tracking-[0.2em] text-[10px] transition-colors pb-1 ${
+                pathname === "/your-rooms" ? "text-primary border-b-2 border-primary" : "text-outline hover:text-on-surface"
+              }`}
+            >
+              Your Rooms
+            </Link>
+          )}
         </nav>
       </div>
 
@@ -151,7 +155,6 @@ export function Header({ className, showSearch = false }: { className?: string; 
         )}
 
         <div className="flex items-center gap-4">
-          <ModeToggle />
           {!session ? (
             <button
               onClick={() => signIn()}

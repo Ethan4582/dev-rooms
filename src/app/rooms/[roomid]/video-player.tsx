@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import { Room } from "@/db/schema";
 import { generateTokenAction } from "./action";
 import { useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
+import { Loader } from "@/components/Loader";
 
 const apiKey = process.env.NEXT_PUBLIC_GET_STREAM_API_KEY!;
 
@@ -49,7 +49,7 @@ export function DevfinderVideo({ room }: { room: Room }) {
         tokenProvider: () => generateTokenAction(),
       });
 
-      const call = client.call("default", room.id);
+      const call = client.call("default", String(room.id));
       await call.join({ create: true });
 
       if (!active) return;
@@ -67,11 +67,13 @@ export function DevfinderVideo({ room }: { room: Room }) {
     return () => {
       active = false;
       if (localCall && localClient) {
+        const clientToDisconnect = localClient;
         localCall
           .leave()
-          .then(() => localClient.disconnectUser())
+          .then(() => clientToDisconnect.disconnectUser())
           .catch(console.error);
       }
+
     };
   }, [session, room]);
 
@@ -96,11 +98,12 @@ export function DevfinderVideo({ room }: { room: Room }) {
 
   if (loading || leaving || !client || !call) {
     return (
-      <div className="flex items-center justify-center h-full min-h-[50vh]">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+      <div className="flex items-center justify-center h-full min-h-[50vh] bg-surface-dim">
+        <Loader />
       </div>
     );
   }
+
 
   return (
     <StreamVideo client={client}>

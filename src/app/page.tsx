@@ -3,6 +3,7 @@
 import { Header } from './header';
 import HeroSection from './landing/HeroSection';
 import FeaturesSection from './landing/FeaturesSection';
+import FAQSection from './landing/FAQSection';
 import CTASection from './landing/CTASection';
 import Footer from './landing/Footer';
 
@@ -13,6 +14,7 @@ export default function LandingPage() {
       <main className="flex-grow">
         <HeroSection />
         <FeaturesSection />
+        <FAQSection />
         <CTASection />
       </main>
       <Footer />

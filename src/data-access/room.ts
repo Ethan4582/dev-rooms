@@ -7,25 +7,29 @@ import { authOptions } from "@/lib/auth";
 
 import { getServerSession } from "next-auth";
 
-export async function getRooms(search?: string) {
-   unstable_noStore(); 
+export async function getRooms(search?: string, tag?: string) {
+  unstable_noStore(); 
 
+  const rooms = await db.query.room.findMany({
+    where: (room, { like, or, and }) => {
+      const searchFilter = search ? or(
+        like(room.name, `%${search}%`),
+        like(room.description, `%${search}%`),
+        like(room.language, `%${search}%`),
+        like(room.githubRepo, `%${search}%`)
+      ) : undefined;
 
-  if (search && search.trim() !== "") {
-    const rooms = await db.query.room.findMany({
-      where: (room, { like, or }) =>
-        or(
-          like(room.name, `%${search}%`),
-          like(room.description, `%${search}%`),
-          like(room.language, `%${search}%`),
-          like(room.githubRepo, `%${search}%`)
-        ),
-    });
+      const tagFilter = (tag && tag !== "All Topics") ? like(room.language, `%${tag}%`) : undefined;
+
+      if (searchFilter && tagFilter) return and(searchFilter, tagFilter);
+      return searchFilter || tagFilter;
+    }
+  });
+  
   return rooms;
-  }
- 
-  return await db.query.room.findMany({});
 }
+
+
 
 export async function getRoom(roomId: string) {
    unstable_noStore(); 

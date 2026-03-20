@@ -64,7 +64,7 @@ export function YourRoomsList({ rooms }: { rooms: Room[] }) {
         </AlertDialogContent>
       </AlertDialog>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-outline-variant/20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-700">
         {rooms.map((room) => (
           <RoomCard 
             key={String(room.id)} 
@@ -75,6 +75,7 @@ export function YourRoomsList({ rooms }: { rooms: Room[] }) {
           />
         ))}
       </div>
+
     </>
   );
 }
