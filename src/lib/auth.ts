@@ -26,6 +26,9 @@ export const authOptions = {
 }),
     // ...add more providers here
   ],
+  pages: {
+    signIn: '/auth/signin',
+  },
 
   callbacks: {
     async jwt({ token, account, user }) {
@@ -79,7 +82,6 @@ export const authOptions = {
       },
     },
   },
-  trustHost: true,
   debug: true, // Add this to see detailed errors
 } satisfies AuthOptions;
 

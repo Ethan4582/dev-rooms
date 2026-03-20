@@ -3,13 +3,10 @@
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import {
   Call,
-  CallControls,
-  SpeakerLayout,
   StreamCall,
   StreamTheme,
   StreamVideo,
   StreamVideoClient,
-  CallParticipantsList,
 } from "@stream-io/video-react-sdk";
 
 import { useSession } from "next-auth/react";
@@ -18,6 +15,7 @@ import { Room } from "@/db/schema";
 import { generateTokenAction } from "./action";
 import { useRouter } from "next/navigation";
 import { Loader } from "@/components/Loader";
+import { CustomCallLayout } from "./CustomCallLayout";
 
 const apiKey = process.env.NEXT_PUBLIC_GET_STREAM_API_KEY!;
 
@@ -68,33 +66,43 @@ export function DevfinderVideo({ room }: { room: Room }) {
       active = false;
       if (localCall && localClient) {
         const clientToDisconnect = localClient;
-        localCall
-          .leave()
-          .then(() => clientToDisconnect.disconnectUser())
-          .catch(console.error);
+        const callToLeave = localCall;
+        
+        const cleanup = async () => {
+          try {
+            await callToLeave.camera.disable();
+            await callToLeave.microphone.disable();
+            await callToLeave.leave();
+            await clientToDisconnect.disconnectUser();
+          } catch (e) {
+            console.error("Cleanup failed:", e);
+          }
+        };
+        cleanup();
       }
-
     };
+
   }, [session, room]);
 
   const handleLeave = async () => {
     setLeaving(true);
 
-    if (call) await call.leave().catch(console.error);
-    if (client) await client.disconnectUser().catch(console.error);
-
-   
-    if (typeof navigator !== "undefined") {
-      navigator.mediaDevices
-        ?.getUserMedia({ video: true, audio: true })
-        .then((stream) => {
-          stream.getTracks().forEach((track) => track.stop());
-        })
-        .catch(() => {});
+    try {
+      if (call) {
+        await call.camera.disable();
+        await call.microphone.disable();
+        await call.leave();
+      }
+      if (client) {
+        await client.disconnectUser();
+      }
+    } catch (error) {
+      console.error("Error during leave:", error);
     }
 
     router.push("/browse");
   };
+
 
   if (loading || leaving || !client || !call) {
     return (
@@ -104,14 +112,11 @@ export function DevfinderVideo({ room }: { room: Room }) {
     );
   }
 
-
   return (
     <StreamVideo client={client}>
       <StreamTheme>
         <StreamCall call={call}>
-          <SpeakerLayout />
-          <CallControls onLeave={handleLeave} />
-          <CallParticipantsList onClose={() => undefined} />
+          <CustomCallLayout room={room} onLeave={handleLeave} />
         </StreamCall>
       </StreamTheme>
     </StreamVideo>

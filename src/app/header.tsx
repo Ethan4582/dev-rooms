@@ -33,23 +33,23 @@ function AccountDropdown() {
   return (
     <>
       <AlertDialog open={open} onOpenChange={setOpen}>
-        <AlertDialogContent className="bg-surface-container-high border-outline-variant/30">
+        <AlertDialogContent className="bg-[#0a0a0a] border border-white/10 rounded-sm shadow-2xl">
           <AlertDialogHeader>
-            <AlertDialogTitle className="font-headline uppercase">Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription className="text-on-surface-variant text-xs font-body">
-              This action cannot be undone. This will permanently remove your account and any associated data.
+            <AlertDialogTitle className="font-headline uppercase text-primary tracking-widest text-sm">Decommission Account?</AlertDialogTitle>
+            <AlertDialogDescription className="text-outline/60 text-[11px] font-mono leading-relaxed">
+              WARNING: This operation is irreversible. All session logs and associated developer credentials will be purged from the cluster.
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel className="bg-transparent border-outline-variant text-[10px] font-label uppercase tracking-widest text-on-surface">Cancel</AlertDialogCancel>
+          <AlertDialogFooter className="mt-6">
+            <AlertDialogCancel className="bg-transparent border border-white/5 text-[9px] font-black uppercase tracking-[0.2em] text-outline hover:bg-white/5 rounded-none p-4">Abort</AlertDialogCancel>
             <AlertDialogAction
-              className="bg-error text-on-error hover:bg-error/90 text-[10px] font-label uppercase tracking-widest"
+              className="bg-[#ff4b4b] text-white hover:bg-[#ff4b4b]/90 text-[9px] font-black uppercase tracking-[0.2em] rounded-none p-4"
               onClick={async () => {
                 await deleteAccountAction();
                 signOut({ callbackUrl: "/" });
               }}
             >
-              Yes, delete my account
+              Confirm_Purge
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -57,32 +57,39 @@ function AccountDropdown() {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <Avatar className="h-8 w-8 ghost-border rounded-none">
-              <AvatarImage src={session.data?.user?.image ?? ""} />
-              <AvatarFallback><UserIcon /></AvatarFallback>
+          <button className="flex items-center gap-2 hover:opacity-80 transition-all active:scale-95 group">
+            <Avatar className="h-10 w-10 border border-white/10 rounded-none shadow-xl group-hover:border-primary/40 transition-colors">
+              <AvatarImage src={session.data?.user?.image ?? ""} className="grayscale-[0.5] group-hover:grayscale-0 transition-all" />
+              <AvatarFallback className="bg-[#111111] text-primary"><UserIcon className="w-4 h-4" /></AvatarFallback>
             </Avatar>
           </button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-surface-container-high shadow-xl border-outline-variant/30 font-headline">
+        <DropdownMenuContent align="end" className="bg-[#111111] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/5 p-2 w-56 rounded-none animate-in fade-in zoom-in-95 duration-200">
+          <div className="px-4 py-3 border-b border-white/5 mb-2">
+             <p className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">{session.data?.user?.name}</p>
+             <p className="text-[8px] font-mono text-outline/40 uppercase tracking-widest mt-1">Active_Node</p>
+          </div>
           <DropdownMenuItem
-            className="hover:bg-primary/10 cursor-pointer text-xs uppercase tracking-widest text-on-surface"
+            className="flex items-center gap-3 px-4 py-3 hover:bg-white/5 focus:bg-white/5 cursor-pointer text-[10px] font-black uppercase tracking-[0.2em] text-outline hover:text-white transition-all rounded-none"
             onClick={() => signOut({ callbackUrl: "/" })}
           >
-            <LogOutIcon className="mr-2 h-3 w-3" /> Sign Out
+            <LogOutIcon className="h-3.5 w-3.5 text-outline group-hover:text-primary transition-colors" />
+            <span>Sign Out</span>
           </DropdownMenuItem>
 
           <DropdownMenuItem
-            className="text-error hover:bg-error/10 cursor-pointer text-xs uppercase tracking-widest"
+            className="flex items-center gap-3 px-4 py-3 hover:bg-[#ff4b4b]/10 focus:bg-[#ff4b4b]/10 cursor-pointer text-[10px] font-black uppercase tracking-[0.2em] text-[#ff4b4b] transition-all rounded-none mt-1"
             onClick={() => setOpen(true)}
           >
-            <DeleteIcon className="mr-2 h-3 w-3" /> Delete Account
+            <DeleteIcon className="h-3.5 w-3.5" />
+            <span>Delete Account</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>
   );
 }
+
 
 export function Header({ className, showSearch = false }: { className?: string; showSearch?: boolean }) {
   const { data: session } = useSession();
