@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#ee7d77",
+              "primary-fixed-dim": "#5fedb0",
+              "surface-dim": "#0e0e0e",
+              "on-tertiary": "#006444",
+              "surface-container-high": "#1f2020",
+              "on-surface": "#e7e5e4",
+              "on-error-container": "#ff9993",
+              "secondary-container": "#2e3c50",
+              "secondary-fixed": "#d5e3fd",
+              "on-secondary": "#122133",
+              "tertiary-fixed": "#7ff3be",
+              "inverse-surface": "#fcf9f8",
+              "on-tertiary-fixed": "#00452e",
+              "on-background": "#e7e5e4",
+              "on-primary-fixed": "#004930",
+              "primary-container": "#005236",
+              "surface-bright": "#2c2c2c",
+              "secondary-fixed-dim": "#c7d5ee",
+              "on-primary-container": "#5ae9ac",
+              "error-container": "#7f2927",
+              "surface": "#0e0e0e",
+              "inverse-primary": "#006d4a",
+              "on-error": "#490106",
+              "on-tertiary-fixed-variant": "#006545",
+              "outline-variant": "#484848",
+              "surface-variant": "#252626",
+              "surface-container-lowest": "#000000",
+              "on-secondary-container": "#b2c0d9",
+              "error-dim": "#bb5551",
+              "inverse-on-surface": "#565555",
+              "tertiary": "#9bffcf",
+              "secondary": "#909fb6",
+              "on-tertiary-container": "#005a3d",
+              "outline": "#767575",
+              "on-primary": "#004a31",
+              "primary-dim": "#3cd096",
+              "surface-container-low": "#131313",
+              "tertiary-container": "#7ff3be",
+              "on-secondary-fixed-variant": "#4e5c71",
+              "primary": "#4edea3",
+              "surface-container-highest": "#252626",
+              "tertiary-fixed-dim": "#71e4b1",
+              "on-primary-fixed-variant": "#006947",
+              "tertiary-dim": "#71e4b1",
+              "on-surface-variant": "#acabaa",
+              "background": "#0e0e0e",
+              "surface-container": "#191a1a",
+              "surface-tint": "#4edea3",
+              "secondary-dim": "#909fb6",
+              "primary-fixed": "#6ffbbe",
+              "on-secondary-fixed": "#324054"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "0px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .ghost-border {
+            border: 1px solid rgba(72, 72, 72, 0.2);
+        }
+        .emerald-gradient {
+            background: linear-gradient(135deg, #4edea3 0%, #005236 100%);
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; }
+        ::-webkit-scrollbar-thumb { background: #1f2020; }
+        ::-webkit-scrollbar-thumb:hover { background: #4edea3; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<nav class="bg-[#0e0e0e] flex justify-between items-center w-full px-6 py-4 mx-auto fixed top-0 z-50 border-b-0">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tighter text-[#4edea3] font-['Space_Grotesk']">DevFinder</span>
+<div class="hidden md:flex gap-6">
+<a class="text-[#4edea3] font-bold border-b-2 border-[#4edea3] pb-1 font-['Space_Grotesk'] tracking-tight" href="#">Browse</a>
+<a class="text-gray-400 hover:text-white transition-colors font-['Space_Grotesk'] tracking-tight" href="#">Your Rooms</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-gray-400 hover:text-white transition-colors font-['Space_Grotesk'] text-sm uppercase tracking-widest px-4 py-2">Sign In</button>
+<button class="emerald-gradient text-on-primary font-bold px-6 py-2 transition-all duration-200 active:scale-95 font-['Space_Grotesk'] text-sm uppercase tracking-widest">Get Started</button>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center px-6 md:px-12 overflow-hidden bg-surface">
+<div class="grid md:grid-cols-12 gap-12 w-full max-w-7xl mx-auto">
+<div class="md:col-span-7 flex flex-col justify-center gap-6 z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high ghost-border w-fit">
+<span class="material-symbols-outlined text-primary text-sm">terminal</span>
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">System Status: Operational</span>
+</div>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter leading-none text-on-surface">
+                        Find your next <span class="text-primary">pair-programming</span> partner.
+                    </h1>
+<p class="text-on-surface-variant text-lg md:text-xl max-w-xl leading-relaxed border-l-2 border-primary/20 pl-6">
+                        The architectural core for real-time remote collaboration. Discover, create, and join coding rooms instantly.
+                    </p>
+<div class="flex flex-wrap gap-4 mt-4">
+<button class="emerald-gradient text-on-primary font-bold px-8 py-4 flex items-center gap-2 transition-all active:scale-95">
+<span class="font-label uppercase tracking-widest">Browse Rooms</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="ghost-border bg-surface-container-low text-on-surface font-bold px-8 py-4 hover:bg-surface-container-high transition-all active:scale-95">
+<span class="font-label uppercase tracking-widest">Create a Room</span>
+</button>
+</div>
+</div>
+<div class="md:col-span-5 relative flex items-center justify-center">
+<!-- Technical UI Mockup -->
+<div class="w-full bg-surface-container-lowest ghost-border p-4 font-mono text-[11px] leading-tight relative shadow-2xl shadow-primary/5">
+<div class="flex items-center justify-between mb-4 border-b border-outline-variant/30 pb-2">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 bg-error/40"></div>
+<div class="w-2.5 h-2.5 bg-tertiary-dim/40"></div>
+<div class="w-2.5 h-2.5 bg-primary/40"></div>
+</div>
+<span class="text-on-surface-variant opacity-50">dev_finder_v1.0.4</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-start gap-3 bg-surface-container p-2">
+<div class="w-8 h-8 bg-primary/20 flex items-center justify-center text-primary ghost-border">
+<span class="material-symbols-outlined text-sm">code</span>
+</div>
+<div>
+<div class="text-primary font-bold">Refactor/Auth_Module</div>
+<div class="text-on-surface-variant">2/4 Developers Joined</div>
+<div class="flex gap-2 mt-1">
+<span class="bg-surface-container-highest px-1 border border-outline-variant/20">TypeScript</span>
+<span class="bg-surface-container-highest px-1 border border-outline-variant/20">Node.js</span>
+</div>
+</div>
+</div>
+<div class="text-on-surface-variant/40 pl-2">-- fetching active_sessions...</div>
+<div class="flex items-start gap-3 bg-surface-container p-2">
+<div class="w-8 h-8 bg-tertiary/20 flex items-center justify-center text-tertiary ghost-border">
+<span class="material-symbols-outlined text-sm">terminal</span>
+</div>
+<div>
+<div class="text-tertiary font-bold">Kernel_Optimization</div>
+<div class="text-on-surface-variant">1/2 Developers Joined</div>
+<div class="flex gap-2 mt-1">
+<span class="bg-surface-container-highest px-1 border border-outline-variant/20">Rust</span>
+<span class="bg-surface-container-highest px-1 border border-outline-variant/20">Wasm</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative background grid -->
+<div class="absolute inset-0 -z-10 pointer-events-none opacity-20" style="background-image: radial-gradient(circle at 2px 2px, #484848 1px, transparent 0); background-size: 24px 24px;"></div>
+</div>
+</div>
+</section>
+<!-- Core Features Section -->
+<section class="py-24 px-6 md:px-12 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16">
+<span class="font-label text-xs uppercase tracking-[0.3em] text-primary block mb-2">Technical Capabilities</span>
+<h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Engineered for Performance.</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-1">
+<!-- Feature 1 -->
+<div class="bg-surface-container-high p-8 ghost-border hover:bg-surface-container-highest transition-colors group">
+<div class="w-12 h-12 flex items-center justify-center bg-primary text-on-primary mb-6 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-2xl">search_insights</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4">Discovery Hub</h3>
+<p class="text-on-surface-variant leading-relaxed text-sm">
+                            Search and filter rooms by technology tags. Our high-density indexing ensures you find the exact stack match in milliseconds.
+                        </p>
+<div class="mt-8 pt-8 border-t border-outline-variant/20 flex gap-2">
+<span class="w-2 h-2 bg-primary"></span>
+<span class="w-2 h-2 bg-outline-variant"></span>
+<span class="w-2 h-2 bg-outline-variant"></span>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container-high p-8 ghost-border hover:bg-surface-container-highest transition-colors group">
+<div class="w-12 h-12 flex items-center justify-center bg-primary text-on-primary mb-6 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-2xl">hub</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4">Seamless Collaboration</h3>
+<p class="text-on-surface-variant leading-relaxed text-sm">
+                            Real-time video/audio, screen sharing, and participant presence. Sub-50ms latency for a true pair-programming experience.
+                        </p>
+<div class="mt-8 pt-8 border-t border-outline-variant/20 flex gap-2">
+<span class="w-2 h-2 bg-primary"></span>
+<span class="w-2 h-2 bg-primary"></span>
+<span class="w-2 h-2 bg-outline-variant"></span>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container-high p-8 ghost-border hover:bg-surface-container-highest transition-colors group">
+<div class="w-12 h-12 flex items-center justify-center bg-primary text-on-primary mb-6 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-2xl">settings_input_component</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4">Room Management</h3>
+<p class="text-on-surface-variant leading-relaxed text-sm">
+                            Create and edit rooms with GitHub repository integration and custom tags. Full ownership of your development environment.
+                        </p>
+<div class="mt-8 pt-8 border-t border-outline-variant/20 flex gap-2">
+<span class="w-2 h-2 bg-primary"></span>
+<span class="w-2 h-2 bg-primary"></span>
+<span class="w-2 h-2 bg-primary"></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works Section -->
+<section class="py-24 px-6 md:px-12 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-20">
+<h2 class="font-headline text-3xl md:text-4xl font-bold tracking-tight uppercase">Implementation Protocol</h2>
+</div>
+<div class="grid md:grid-cols-4 gap-0 ghost-border">
+<!-- Step 1 -->
+<div class="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
+<div class="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">01</div>
+<h4 class="font-label text-xs tracking-widest text-primary mb-4">AUTHENTICATION</h4>
+<h3 class="font-headline text-lg font-bold mb-4">Sign In</h3>
+<p class="text-on-surface-variant text-sm">Secure OAuth integration via GitHub. Connect your development identity instantly.</p>
+<div class="mt-12 h-1 bg-surface-container-high relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/40 w-1/4"></div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
+<div class="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">02</div>
+<h4 class="font-label text-xs tracking-widest text-primary mb-4">DISCOVERY</h4>
+<h3 class="font-headline text-lg font-bold mb-4">Browse Rooms</h3>
+<p class="text-on-surface-variant text-sm">Explore the live grid of active coding sessions filtered by your preferred stack.</p>
+<div class="mt-12 h-1 bg-surface-container-high relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/40 w-2/4"></div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
+<div class="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">03</div>
+<h4 class="font-label text-xs tracking-widest text-primary mb-4">ACTION</h4>
+<h3 class="font-headline text-lg font-bold mb-4">Join or Create</h3>
+<p class="text-on-surface-variant text-sm">Jump into an existing thread or deploy your own private room for focused pair work.</p>
+<div class="mt-12 h-1 bg-surface-container-high relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/40 w-3/4"></div>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
+<div class="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">04</div>
+<h4 class="font-label text-xs tracking-widest text-primary mb-4">REAL-TIME</h4>
+<h3 class="font-headline text-lg font-bold mb-4">Collaborate</h3>
+<p class="text-on-surface-variant text-sm">Synchronize your workflow. Share code, audio, and video in a specialized shell environment.</p>
+<div class="mt-12 h-1 bg-surface-container-high relative overflow-hidden">
+<div class="absolute inset-0 bg-primary w-full"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-32 px-6 md:px-12 bg-surface-container-lowest">
+<div class="max-w-4xl mx-auto text-center border border-primary/20 p-12 relative overflow-hidden">
+<!-- Background visual -->
+<div class="absolute inset-0 pointer-events-none opacity-5">
+<div class="absolute inset-0" style="background-image: linear-gradient(#4edea3 1px, transparent 1px), linear-gradient(90deg, #4edea3 1px, transparent 1px); background-size: 40px 40px;"></div>
+</div>
+<h2 class="font-headline text-4xl md:text-6xl font-bold tracking-tighter mb-8 relative z-10">Ready to build together?</h2>
+<div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+<button class="emerald-gradient text-on-primary font-bold px-10 py-5 transition-all active:scale-95 flex items-center justify-center gap-3 group">
+<span class="font-label uppercase tracking-[0.2em]">Browse All Rooms</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">rocket_launch</span>
+</button>
+<button class="bg-surface text-on-surface ghost-border px-10 py-5 transition-all hover:bg-surface-container-high active:scale-95 font-label uppercase tracking-[0.2em]">
+                        Sign Up Now
+                    </button>
+</div>
+<div class="mt-12 flex justify-center gap-8 text-on-surface-variant font-mono text-[10px] uppercase tracking-widest opacity-60">
+<span>Direct Access</span>
+<span>No Middleware</span>
+<span>Developer First</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#000000] flex flex-col md:flex-row justify-between items-center w-full px-8 py-12 gap-4 border-t-0">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="text-[#4edea3] font-black font-['Space_Grotesk'] tracking-widest text-xl">DevFinder</span>
+<p class="text-gray-500 font-['Space_Grotesk'] text-xs uppercase tracking-widest">© 2024 DevFinder. Structural Precision.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-gray-500 hover:text-[#4edea3] transition-colors font-['Space_Grotesk'] text-xs uppercase tracking-widest opacity-80 hover:opacity-100" href="#">Documentation</a>
+<a class="text-gray-500 hover:text-[#4edea3] transition-colors font-['Space_Grotesk'] text-xs uppercase tracking-widest opacity-80 hover:opacity-100" href="#">Changelog</a>
+<a class="text-gray-500 hover:text-[#4edea3] transition-colors font-['Space_Grotesk'] text-xs uppercase tracking-widest opacity-80 hover:opacity-100" href="#">Status</a>
+<a class="text-gray-500 hover:text-[#4edea3] transition-colors font-['Space_Grotesk'] text-xs uppercase tracking-widest opacity-80 hover:opacity-100" href="#">Privacy</a>
+</div>
+</footer>
+</body></html>

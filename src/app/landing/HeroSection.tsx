@@ -1,89 +1,77 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
-import { SearchIcon, CodeIcon } from 'lucide-react';
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
-};
-
-const floatingAnimation = {
-  float: {
-    y: [0, -10, 0],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  }
-};
 
 export default function HeroSection() {
   return (
-    <section
-      className="
-        relative w-full overflow-hidden
-        bg-slate-100
-        dark:bg-slate-900
-        pt-24 pb-10 md:pt-38 md:pb-16
-        transition-colors
-      "
-    >
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-[size:20px_20px] opacity-10 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-br from-white/70 to-transparent dark:from-slate-900/60 dark:to-transparent" />
-      
-      {/* Floating elements */}
-      <div className="absolute top-20 left-10 w-64 h-64 bg-[#818cf8]/30 dark:bg-[#818cf8]/20 rounded-full blur-[100px] animate-float" />
-      <div className="absolute bottom-20 right-10 w-72 h-72 bg-[#818cf8]/20 dark:bg-[#818cf8]/10 rounded-full blur-[100px] animate-float animation-delay-2000" />
-      <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-[#818cf8]/10 dark:bg-[#818cf8]/20 rounded-full blur-[80px] animate-float animation-delay-3000" />
-
-      <div className="container relative z-10 mx-auto max-w-7xl px-4 text-center md:px-6">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUp}
-        >
-          <motion.div
-            variants={floatingAnimation}
-            animate="float"
-            className="mb-8"
-          >
-            <Badge className="inline-block rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-4 py-1.5 text-sm text-[#0f172a] dark:border-white/20 dark:bg-white/10 dark:text-white backdrop-blur-sm">
-              🚀 NEXT GENERATION OF DEVELOPER COLLABORATION
-            </Badge>
-          </motion.div>
-          
-          <h1 className="text-5xl font-bold tracking-tight text-[#0f172a] dark:text-white md:text-6xl lg:text-7xl">
-            <span className="block">Code Together in</span>
-            <span className="block bg-gradient-to-r from-[#818cf8] to-indigo-500 bg-clip-text text-transparent">
-              Real-Time Rooms
-            </span>
-          </h1>
-          
-          <p className="mx-auto mb-10 mt-6 max-w-2xl text-xl text-slate-700 dark:text-blue-100/80">
-            DevRoom connects developers through live coding sessions where you can pair program, share screens, and collaborate on projects in real-time.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild size="lg" className="text-lg bg-[#818cf8] text-[#0f172a] hover:bg-[#6366f1] shadow-lg shadow-blue-500/20 dark:shadow-blue-700/30">
-              <Link href="/browse">
-                <SearchIcon className="mr-2 h-5 w-5" />
-                Browse Rooms
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="text-lg border-2 border-[#818cf8]/30 bg-white/50 text-[#818cf8] hover:bg-[#eef0fe] hover:border-[#818cf8] dark:border-white/30 dark:bg-transparent dark:text-white dark:hover:bg-white/10 backdrop-blur-sm">
-              <Link href="/create-room">
-                <CodeIcon className="mr-2 h-5 w-5" />
-                Create Room
-              </Link>
-            </Button>
+    <section className="relative min-h-screen flex items-center px-6 md:px-12 overflow-hidden bg-surface pt-20">
+      <div className="grid md:grid-cols-12 gap-12 w-full max-w-7xl mx-auto">
+        <div className="md:col-span-7 flex flex-col justify-center gap-6 z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high ghost-border w-fit">
+            <span className="material-symbols-outlined text-primary text-sm">terminal</span>
+            <span className="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">System Status: Operational</span>
           </div>
-        </motion.div>
+          <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter leading-none text-on-surface">
+            Find your next <span className="text-primary">pair-programming</span> partner.
+          </h1>
+          <p className="text-on-surface-variant text-lg md:text-xl max-w-xl leading-relaxed border-l-2 border-primary/20 pl-6">
+            The architectural core for real-time remote collaboration. Discover, create, and join coding rooms instantly.
+          </p>
+          <div className="flex flex-wrap gap-4 mt-4">
+            <Link href="/browse" className="emerald-gradient text-on-primary font-bold px-8 py-4 flex items-center gap-2 transition-all active:scale-95">
+              <span className="font-label uppercase tracking-widest">Browse Rooms</span>
+              <span className="material-symbols-outlined">arrow_forward</span>
+            </Link>
+            <Link href="/create-room" className="ghost-border bg-surface-container-low text-on-surface font-bold px-8 py-4 hover:bg-surface-container-high transition-all active:scale-95">
+              <span className="font-label uppercase tracking-widest">Create a Room</span>
+            </Link>
+          </div>
+        </div>
+        <div className="md:col-span-5 relative flex items-center justify-center">
+          {/* Technical UI Mockup */}
+          <div className="w-full bg-surface-container-lowest ghost-border p-4 font-mono text-[11px] leading-tight relative shadow-2xl shadow-primary/5">
+            <div className="flex items-center justify-between mb-4 border-b border-outline-variant/30 pb-2">
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 bg-error/40"></div>
+                <div className="w-2.5 h-2.5 bg-tertiary-dim/40"></div>
+                <div className="w-2.5 h-2.5 bg-primary/40"></div>
+              </div>
+              <span className="text-on-surface-variant opacity-50">dev_finder_v1.0.4</span>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3 bg-surface-container p-2">
+                <div className="w-8 h-8 bg-primary/20 flex items-center justify-center text-primary ghost-border">
+                  <span className="material-symbols-outlined text-sm">code</span>
+                </div>
+                <div>
+                  <div className="text-primary font-bold">Refactor/Auth_Module</div>
+                  <div className="text-on-surface-variant">2/4 Developers Joined</div>
+                  <div className="flex gap-2 mt-1 font-mono">
+                    <span className="bg-surface-container-highest px-1 border border-outline-variant/20 italic">TypeScript</span>
+                    <span className="bg-surface-container-highest px-1 border border-outline-variant/20 italic">Node.js</span>
+                  </div>
+                </div>
+              </div>
+              <div className="text-on-surface-variant/40 pl-2">-- fetching active_sessions...</div>
+              <div className="flex items-start gap-3 bg-surface-container p-2">
+                <div className="w-8 h-8 bg-tertiary/20 flex items-center justify-center text-tertiary ghost-border">
+                  <span className="material-symbols-outlined text-sm">terminal</span>
+                </div>
+                <div>
+                  <div className="text-tertiary font-bold">Kernel_Optimization</div>
+                  <div className="text-on-surface-variant">1/2 Developers Joined</div>
+                  <div className="flex gap-2 mt-1 font-mono">
+                    <span className="bg-surface-container-highest px-1 border border-outline-variant/20 italic">Rust</span>
+                    <span className="bg-surface-container-highest px-1 border border-outline-variant/20 italic">Wasm</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Decorative background grid */}
+          <div className="absolute inset-0 -z-10 pointer-events-none opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #484848 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        </div>
       </div>
     </section>
   );
-}
+}

@@ -1,145 +1,116 @@
-import React, { useState, useEffect, useRef } from 'react';
+'use client';
 import { motion } from 'framer-motion';
-import { Badge } from '@/components/ui/badge';
-import { CodeIcon, Rocket, Sparkles, UsersIcon, VideoIcon } from 'lucide-react';
-
-const FEATURES = [
-	{
-		step: 'Step 1',
-		title: 'Create a Room',
-		content: 'Set up your coding environment with your preferred language and GitHub repo link.',
-		icon: <CodeIcon className="h-6 w-6 text-primary" />,
-		image: '/feat1.png',
-	},
-	{
-		step: 'Step 2',
-		title: 'Invite Developers',
-		content: 'Share your room link or let others discover it through our browsing system.',
-		icon: <UsersIcon className="h-6 w-6 text-primary" />,
-		image: '/feat2.png',
-	},
-	{
-		step: 'Step 3',
-		title: 'Collaborate in Real-time',
-		content: 'Code together with screen sharing, video chat, and shared editing.',
-		icon: <VideoIcon className="h-6 w-6 text-primary" />,
-		image: '/feat3.png',
-	},
-	{
-		step: 'Step 4',
-		title: 'Deploy Together',
-		content: 'Ship your collaborative work directly from the platform to your repo.',
-		icon: <Rocket className="h-6 w-6 text-primary" />,
-		image: '/feat4.png',
-	},
-];
 
 export default function FeaturesSection() {
-	const [currentFeature, setCurrentFeature] = useState(0);
-	const timerRef = useRef<NodeJS.Timeout | null>(null);
+  return (
+    <>
+      {/* Core Features Section */}
+      <section className="py-24 px-6 md:px-12 bg-surface-container-low">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-16">
+            <span className="font-label text-xs uppercase tracking-[0.3em] text-primary block mb-2">Technical Capabilities</span>
+            <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter text-on-surface">Engineered for Performance.</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-1">
+            {/* Feature 1 */}
+            <div className="bg-surface-container-high p-8 ghost-border hover:bg-surface-container-highest transition-colors group">
+              <div className="w-12 h-12 flex items-center justify-center bg-primary text-on-primary mb-6 transition-transform group-hover:scale-110">
+                <span className="material-symbols-outlined text-2xl">search_insights</span>
+              </div>
+              <h3 className="font-headline text-xl font-bold mb-4 text-on-surface">Discovery Hub</h3>
+              <p className="text-on-surface-variant leading-relaxed text-sm">
+                Search and filter rooms by technology tags. Our high-density indexing ensures you find the exact stack match in milliseconds.
+              </p>
+              <div className="mt-8 pt-8 border-t border-outline-variant/20 flex gap-2">
+                <span className="w-2 h-2 bg-primary"></span>
+                <span className="w-2 h-2 bg-outline-variant"></span>
+                <span className="w-2 h-2 bg-outline-variant"></span>
+              </div>
+            </div>
+            {/* Feature 2 */}
+            <div className="bg-surface-container-high p-8 ghost-border hover:bg-surface-container-highest transition-colors group">
+              <div className="w-12 h-12 flex items-center justify-center bg-primary text-on-primary mb-6 transition-transform group-hover:scale-110">
+                <span className="material-symbols-outlined text-2xl">hub</span>
+              </div>
+              <h3 className="font-headline text-xl font-bold mb-4 text-on-surface">Seamless Collaboration</h3>
+              <p className="text-on-surface-variant leading-relaxed text-sm">
+                Real-time video/audio, screen sharing, and participant presence. Sub-50ms latency for a true pair-programming experience.
+              </p>
+              <div className="mt-8 pt-8 border-t border-outline-variant/20 flex gap-2">
+                <span className="w-2 h-2 bg-primary"></span>
+                <span className="w-2 h-2 bg-primary"></span>
+                <span className="w-2 h-2 bg-outline-variant"></span>
+              </div>
+            </div>
+            {/* Feature 3 */}
+            <div className="bg-surface-container-high p-8 ghost-border hover:bg-surface-container-highest transition-colors group">
+              <div className="w-12 h-12 flex items-center justify-center bg-primary text-on-primary mb-6 transition-transform group-hover:scale-110">
+                <span className="material-symbols-outlined text-2xl">settings_input_component</span>
+              </div>
+              <h3 className="font-headline text-xl font-bold mb-4 text-on-surface">Room Management</h3>
+              <p className="text-on-surface-variant leading-relaxed text-sm">
+                Create and edit rooms with GitHub repository integration and custom tags. Full ownership of your development environment.
+              </p>
+              <div className="mt-8 pt-8 border-t border-outline-variant/20 flex gap-2">
+                <span className="w-2 h-2 bg-primary"></span>
+                <span className="w-2 h-2 bg-primary"></span>
+                <span className="w-2 h-2 bg-primary"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-	// Auto-scroll logic
-	useEffect(() => {
-		timerRef.current = setInterval(() => {
-			setCurrentFeature((prev) => (prev + 1) % FEATURES.length);
-		}, 800);
-
-		return () => {
-			if (timerRef.current) clearInterval(timerRef.current);
-		};
-	}, []);
-
-	// Reset timer on manual click
-	const handleFeatureClick = (index: number) => {
-		setCurrentFeature(index);
-		if (timerRef.current) clearInterval(timerRef.current);
-		timerRef.current = setInterval(() => {
-			setCurrentFeature((prev) => (prev + 1) % FEATURES.length);
-		}, 3500);
-	};
-
-	return (
-		<section className="py-16 bg-white dark:bg-gray-900">
-			<div className="container mx-auto max-w-7xl px-4 md:px-6">
-				<div className="mx-auto mb-16 max-w-3xl text-center">
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5 }}
-						viewport={{ once: true }}
-						className="mb-4"
-					>
-						<Badge variant="secondary" className="px-4 py-1 text-sm">
-							<Sparkles className="mr-2 h-4 w-4" />
-							How It Works
-						</Badge>
-					</motion.div>
-					<motion.h2
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5, delay: 0.1 }}
-						viewport={{ once: true }}
-						className="text-3xl font-bold tracking-tight md:text-4xl"
-					>
-						Developer Collaboration Made Simple
-					</motion.h2>
-					<motion.p
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5, delay: 0.2 }}
-						viewport={{ once: true }}
-						className="mt-4 text-lg text-muted-foreground"
-					>
-						Join or create coding rooms in seconds and start collaborating immediately
-					</motion.p>
-				</div>
-				<div className="flex flex-col gap-10 md:grid md:grid-cols-2 md:gap-16">
-					<div className="space-y-8">
-						{FEATURES.map((feature, index) => (
-							<motion.div
-								key={index}
-								className={`flex items-start gap-6 transition-all duration-300 ${
-									index === currentFeature
-										? 'border-l-4 border-[#818cf8] bg-slate-100 dark:bg-slate-800 shadow-md'
-										: 'border-l-4 border-transparent'
-								} pl-4 py-3 rounded-lg cursor-pointer`}
-								initial={{ opacity: 0.3, x: -20 }}
-								animate={{
-									opacity: index === currentFeature ? 1 : 0.7,
-									x: 0,
-								}}
-								transition={{ duration: 0.5 }}
-								onClick={() => handleFeatureClick(index)}
-							>
-								<div
-									className={`flex h-12 w-12 items-center justify-center rounded-lg border-2 ${
-										index === currentFeature
-											? 'border-[#818cf8] bg-[#818cf8]/10'
-											: 'border-muted bg-muted'
-									}`}
-								>
-									{feature.icon}
-								</div>
-								<div className="flex-1">
-									<h3 className="text-xl font-semibold">{feature.title}</h3>
-									<p className="mt-2 text-muted-foreground">
-										{feature.content}
-									</p>
-								</div>
-							</motion.div>
-						))}
-					</div>
-					<div className="relative h-[400px] overflow-hidden rounded-xl border border-border shadow-lg flex flex-col items-center justify-center bg-white dark:bg-gray-900">
-						<div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 pointer-events-none" />
-						<img
-							src={FEATURES[currentFeature].image}
-							alt={FEATURES[currentFeature].title}
-							className="absolute inset-0 w-full h-full object-contain rounded-xl z-10"
-							draggable={false}
-						/>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
-}
+      {/* How It Works Section */}
+      <section className="py-24 px-6 md:px-12 bg-surface">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight uppercase text-on-surface">Implementation Protocol</h2>
+          </div>
+          <div className="grid md:grid-cols-4 gap-0 ghost-border">
+            {/* Step 1 */}
+            <div className="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
+              <div className="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">01</div>
+              <h4 className="font-label text-xs tracking-widest text-primary mb-4">AUTHENTICATION</h4>
+              <h3 className="font-headline text-lg font-bold mb-4 text-on-surface">Sign In</h3>
+              <p className="text-on-surface-variant text-sm">Secure OAuth integration via GitHub. Connect your development identity instantly.</p>
+              <div className="mt-12 h-1 bg-surface-container-high relative overflow-hidden">
+                <div className="absolute inset-0 bg-primary/40 w-1/4"></div>
+              </div>
+            </div>
+            {/* Step 2 */}
+            <div className="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
+              <div className="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">02</div>
+              <h4 className="font-label text-xs tracking-widest text-primary mb-4">DISCOVERY</h4>
+              <h3 className="font-headline text-lg font-bold mb-4 text-on-surface">Browse Rooms</h3>
+              <p className="text-on-surface-variant text-sm">Explore the live grid of active coding sessions filtered by your preferred stack.</p>
+              <div className="mt-12 h-1 bg-surface-container-high relative overflow-hidden">
+                <div className="absolute inset-0 bg-primary/40 w-2/4"></div>
+              </div>
+            </div>
+            {/* Step 3 */}
+            <div className="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
+              <div className="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">03</div>
+              <h4 className="font-label text-xs tracking-widest text-primary mb-4">ACTION</h4>
+              <h3 className="font-headline text-lg font-bold mb-4 text-on-surface">Join or Create</h3>
+              <p className="text-on-surface-variant text-sm">Jump into an existing thread or deploy your own private room for focused pair work.</p>
+              <div className="mt-12 h-1 bg-surface-container-high relative overflow-hidden">
+                <div className="absolute inset-0 bg-primary/40 w-3/4"></div>
+              </div>
+            </div>
+            {/* Step 4 */}
+            <div className="p-8 border-r border-outline-variant/20 md:last:border-r-0 relative group">
+              <div className="font-headline text-6xl font-black text-surface-container-highest absolute top-4 right-4 group-hover:text-primary/10 transition-colors">04</div>
+              <h4 className="font-label text-xs tracking-widest text-primary mb-4">REAL-TIME</h4>
+              <h3 className="font-headline text-lg font-bold mb-4 text-on-surface">Collaborate</h3>
+              <p className="text-on-surface-variant text-sm">Synchronize your workflow. Share code, audio, and video in a specialized shell environment.</p>
+              <div className="mt-12 h-1 bg-surface-container-high relative overflow-hidden">
+                <div className="absolute inset-0 bg-primary w-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

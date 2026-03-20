@@ -16,7 +16,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Image from "next/image";
 import Link from "next/link";
 
- 
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,10 +25,10 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useState } from "react";
 import { deleteAccountAction } from "./actions";
+import { usePathname } from "next/navigation";
 
 
 function AccountDropdown() {
@@ -63,32 +62,33 @@ function AccountDropdown() {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant={"link"}>
-            <Avatar className="mr-2">
+          <button className="flex items-center gap-2 text-on-surface hover:text-primary transition-colors font-headline">
+            <Avatar className="h-8 w-8 ghost-border">
               <AvatarImage src={session.data?.user?.image ?? ""} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-
-            {session.data?.user?.name}
-          </Button>
+            <span className="hidden sm:inline">{session.data?.user?.name}</span>
+          </button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent className="bg-surface-container shadow-xl border-outline-variant">
           <DropdownMenuItem
+            className="hover:bg-primary/10 cursor-pointer"
             onClick={() =>
               signOut({
                 callbackUrl: "/",
               })
             }
           >
-            <LogOutIcon className="mr-2" /> Sign Out
+            <LogOutIcon className="mr-2 h-4 w-4" /> Sign Out
           </DropdownMenuItem>
 
           <DropdownMenuItem
+            className="text-error hover:bg-error/10 cursor-pointer"
             onClick={() => {
               setOpen(true);
             }}
           >
-            <DeleteIcon className="mr-2" /> Delete Account
+            <DeleteIcon className="mr-2 h-4 w-4" /> Delete Account
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -96,56 +96,59 @@ function AccountDropdown() {
   );
 } 
 
-
-
-
-
-
 export function Header() {
    const session = useSession();
    const isLoggedIn = !!session.data;
+   const pathname = usePathname();
 
    return (
-      <header className="bg-slate-100 dark:bg-slate-900 flex items-center justify-between p-3 text-slate-900 dark:text-white relative border-b border-slate-200 dark:border-slate-800">
-         <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/logo.png"
-              alt="Dev Finder Logo"
-              width={32}
-              height={32}
-            />
-            <span className="font-semibold">Dev Rooms</span>
-         </Link>
-
-         <nav>
-            {isLoggedIn && (
-               <ul className="flex items-center gap-4">
-                  <Link href="/browse" className="hover:underline">
-                     Browse
-                  </Link>
-                  <Link href="/your-rooms" className="hover:underline">
+      <nav className="bg-[#0e0e0e] flex justify-between items-center w-full px-6 py-4 mx-auto fixed top-0 z-50 border-b-0">
+         <div className="flex items-center gap-8">
+            <Link href="/" className="text-2xl font-bold tracking-tighter text-[#4edea3] font-headline">
+               DevFinder
+            </Link>
+            
+            <div className="hidden md:flex gap-6">
+               <Link 
+                  href="/browse" 
+                  className={`${pathname === '/browse' ? 'text-[#4edea3] font-bold border-b-2 border-[#4edea3]' : 'text-gray-400 hover:text-white'} pb-1 font-headline tracking-tight transition-colors`}
+               >
+                  Browse
+               </Link>
+               {isLoggedIn && (
+                  <Link 
+                     href="/your-rooms" 
+                     className={`${pathname === '/your-rooms' ? 'text-[#4edea3] font-bold border-b-2 border-[#4edea3]' : 'text-gray-400 hover:text-white'} pb-1 font-headline tracking-tight transition-colors`}
+                  >
                      Your Rooms
                   </Link>
-               </ul>
-            )}
-         </nav>
+               )}
+            </div>
+         </div>
 
          <div className="flex items-center gap-4">
-            {session.data && <AccountDropdown />}
-            {!session.data && (
-               <Button 
-                  variant="link" 
-                  onClick={() => signIn()}
-                  className="text-slate-900 dark:text-white"
-               >
-                  <LogInIcon className="mr-2" />
-                  Sign In 
-               </Button>
+            {!session.data ? (
+               <>
+                  <button 
+                     onClick={() => signIn()}
+                     className="text-gray-400 hover:text-white transition-colors font-headline text-sm uppercase tracking-widest px-4 py-2"
+                  >
+                     Sign In
+                  </button>
+                  <button 
+                     onClick={() => signIn()}
+                     className="emerald-gradient text-on-primary font-bold px-6 py-2 transition-all duration-200 active:scale-95 font-headline text-sm uppercase tracking-widest"
+                  >
+                     Get Started
+                  </button>
+               </>
+            ) : (
+               <div className="flex items-center gap-4">
+                  <AccountDropdown />
+                  <ModeToggle />
+               </div>
             )}
-            <ModeToggle />
          </div>
-      </header>
+      </nav>
    )
 }
-
-
