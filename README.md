@@ -1,7 +1,5 @@
 # DevFinder
 
-**Discover and collaborate with pair-programming partners in real-time.**
-
 DevFinder is a platform for developers to host, find, and join live collaboration sessions. Whether you are hosting a daily stand-up or a hackathon, DevFinder provides high-performance video and audio conferencing coupled with search-driven room discovery.
 
 
@@ -12,10 +10,6 @@ DevFinder is a platform for developers to host, find, and join live collaboratio
 ![Devfinder Preview 1](public/img2.0.png)
 
 ![Devfinder Preview 1](public/img2.png)
-
-![Devfinder Preview 1](public/img6.png)
-
-![Devfinder Preview 1](public/img6.png)
 
 ## Key Features
 
