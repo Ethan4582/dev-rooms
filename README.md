@@ -1,63 +1,53 @@
-# RepoSense
+# DevFinder
 
-**Chat with your GitHub repositories using AI-powered analysis and summarization**
+**Discover and collaborate with pair-programming partners in real-time.**
 
-<img src="public/img3.png" alt="RepoSense Demo Cover" style="width:100%;max-width:600px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);" />
-
-<br/>
-
-# Demo Video
-
-[![Demo Video](public/img2.png)](https://www.youtube.com/watch?v=PQqPkdpA0V0)
+DevFinder is a platform for developers to host, find, and join live collaboration sessions. Whether you are hosting a daily stand-up or a hackathon, DevFinder provides high-performance video and audio conferencing coupled with search-driven room discovery.
 
 
-RepoSense transforms GitHub repositories into intelligent, searchable knowledge bases. Upload your repository, and our AI will analyze, summarize, and create a conversational interface for your codebase.
+![Devfinder Preview 1](public/img1.png)
+
+![Devfinder Preview 1](public/img1.5.png)
+
+![Devfinder Preview 1](public/img2.0.png)
+
+![Devfinder Preview 1](public/img2.png)
+
+![Devfinder Preview 1](public/img6.png)
+
+![Devfinder Preview 1](public/img6.png)
 
 ## Key Features
 
-### 🔍 **Repository Analysis**
-- Automatic extraction and analysis of important files
-- AI-powered file summarization using Gemini
-- Commit history visualization with intelligent summaries
-
-### 💬 **Intelligent Q&A**
-- Chat with your repository using natural language
-- Context-aware responses powered by RAG (Retrieval-Augmented Generation)
-- Reference tracking showing which files informed each answer
-
-### 📝 **Meeting Integration**
-- Upload meeting recordings for automatic transcription
-- AI-generated meeting summaries with key issues and timestamps
-- Convert discussions into actionable insights
-
-### 👥 **Collaboration**
-- Invite team members to collaborate on projects
-- Shared access to repository insights and Q&A history
-- Saved questions and answers for team knowledge sharing
+- **Real-time Video Collaboration**: High-quality video and audio conferencing tracks with screen sharing powered by the Stream.io SDK.
+- **Dynamic Node Discovery**: Browse a global grid of active "nodes" (rooms) with real-time participant counts and GitHub context.
+- **Intelligent Tech Filtering**: Quickly find rooms by technology stack using our tiered tag directory and top-trending filters.
+- **Secure Host Permissions**: Integrated moderation controls allowing creators to manage participants and session states efficiently.
+- **Premium Fluid UI**: A state-of-the-art interface with glassmorphism aesthetics, fully optimized for both desktop and mobile viewports.
 
 ## Technology Stack
 
-- **Frontend**: Next.js
-- **AI/ML**: Gemini AI, LangChain, Hugging Face
-- **Database**: PostgreSQL (Neon) with vector embeddings
-- **Storage**: Cloudinary
-- **Audio Processing**: Assembly.AI
-- **Payment**: Stripe integration
-- **ORM**: Prisma
+- **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Collaboration**: [Stream.io SDK](https://getstream.io/video/)
+- **Database**: [PostgreSQL (Neon)](https://neon.tech/) & [Drizzle ORM](https://orm.drizzle.team/)
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/) (Google Provider)
+- **UI Components**: [Radix UI](https://www.radix-ui.com/) & [Lucide React Icons](https://lucide.dev/)
 
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 18+
-- PostgreSQL database
-- GitHub personal access token
+- PostgreSQL database (e.g., Neon)
+- Stream.io API Keys
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/reposense.git
-   cd reposense
+   git clone https://github.com/Ethan4582/dev-finder.git
+   cd dev-finder
    ```
 
 2. **Install dependencies**
@@ -70,20 +60,19 @@ RepoSense transforms GitHub repositories into intelligent, searchable knowledge 
    cp .env.example .env.local
    ```
    
-   Configure the following variables:
+   Configure the following variables in your `.env`:
    ```env
-   DATABASE_URL=your_postgresql_connection_string
-   GEMINI_API_KEY=your_gemini_api_key
-   GITHUB_TOKEN=your_github_token
-   CLOUDINARY_URL=your_cloudinary_url
-   ASSEMBLY_AI_KEY=your_assembly_ai_key
-   STRIPE_SECRET_KEY=your_stripe_secret_key
+   DATABASE_URL=your_postgresql_url
+   GOOGLE_CLIENT_ID=your_google_id
+   GOOGLE_CLIENT_SECRET=your_google_secret
+   NEXTAUTH_SECRET=your_nextauth_secret
+   NEXT_PUBLIC_GET_STREAM_API_KEY=your_stream_api_key
+   GET_STREAM_SECRET_KEY=your_stream_secret_key
    ```
 
-4. **Set up the database**
+4. **Initialize Database**
    ```bash
-   npx prisma generate
-   npx prisma db push
+   npm run db:push
    ```
 
 5. **Run the development server**
@@ -91,39 +80,14 @@ RepoSense transforms GitHub repositories into intelligent, searchable knowledge 
    npm run dev
    ```
 
-## Usage
-
-### Analyzing a Repository
-
-1. **Add Repository**: Paste your GitHub repository URL
-2. **Processing**: AI analyzes and summarizes important files
-3. **Explore**: View commit summaries and file insights
-4. **Chat**: Ask questions about your codebase
-
-### Meeting Analysis
-
-1. **Upload Audio**: Add meeting recordings (supported formats: MP3, WAV, MP4)
-2. **Processing**: Automatic transcription and AI analysis
-3. **Review**: Access timestamped summaries and key issues
-
-## Pricing
-
-- **Free Tier**: 150 credits included
-- **Additional Credits**: $0.20 per 10 credits
-- **Usage**: 1 credit per file summary
-
-## API Rate Limits
-
-⚠️ **Important**: This project uses Gemini's free tier API, which may hit rate limits for larger repositories. For production use, consider upgrading to a paid API plan.
-
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create a feature branch (`git checkout -b feature/improvement`)
+3. Commit your changes (`git commit -m 'Added enhancement'`)
+4. Push to the branch (`git push origin feature/improvement`)
 5. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
