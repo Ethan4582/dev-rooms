@@ -42,7 +42,6 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Header />
             <NextTopLoader />
             {children}
           </ThemeProvider>
