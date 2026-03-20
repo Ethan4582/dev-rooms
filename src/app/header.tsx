@@ -167,7 +167,7 @@ export function Header({ className, showSearch = false }: { className?: string; 
               onClick={() => signIn()}
               className="emerald-gradient text-on-primary font-bold px-6 py-2.5 transition-all text-[10px] uppercase tracking-widest hover:brightness-110 active:scale-95"
             >
-              Initialize_Shell
+              Sign In
             </button>
           ) : (
             <AccountDropdown />
