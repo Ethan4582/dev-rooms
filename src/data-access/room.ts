@@ -7,39 +7,45 @@ import { authOptions } from "@/lib/auth";
 
 import { getServerSession } from "next-auth";
 
-export async function getRooms(search?: string, tag?: string) {
-  unstable_noStore(); 
+import { unstable_cache } from 'next/cache';
 
-  const rooms = await db.query.room.findMany({
-    where: (room, { like, or, and }) => {
-      const searchFilter = search ? or(
-        like(room.name, `%${search}%`),
-        like(room.description, `%${search}%`),
-        like(room.language, `%${search}%`),
-        like(room.githubRepo, `%${search}%`)
-      ) : undefined;
+export const getRooms = unstable_cache(
+  async (search?: string, tag?: string) => {
+    const rooms = await db.query.room.findMany({
+      where: (room, { like, or, and }) => {
+        const searchFilter = search ? or(
+          like(room.name, `%${search}%`),
+          like(room.description, `%${search}%`),
+          like(room.language, `%${search}%`),
+          like(room.githubRepo, `%${search}%`)
+        ) : undefined;
 
-      const tagFilter = (tag && tag !== "All Topics") ? like(room.language, `%${tag}%`) : undefined;
+        const tagFilter = (tag && tag !== "All Topics") ? like(room.language, `%${tag}%`) : undefined;
 
-      if (searchFilter && tagFilter) return and(searchFilter, tagFilter);
-      return searchFilter || tagFilter;
+        if (searchFilter && tagFilter) return and(searchFilter, tagFilter);
+        return searchFilter || tagFilter;
+      }
+    });
+    return rooms;
+  },
+  ['get-rooms'],
+  { revalidate: 3600, tags: ['rooms'] }
+);
+
+
+
+export const getRoom = unstable_cache(
+  async (roomId: string) => {
+    if (!roomId || roomId.trim() === "") {
+      throw new Error("Room ID is required");
     }
-  });
-  
-  return rooms;
-}
-
-
-
-export async function getRoom(roomId: string) {
-   unstable_noStore(); 
-  if (!roomId || roomId.trim() === "") {
-    throw new Error("Room ID is required");
-  }
-  return await db.query.room.findFirst({
-    where: (room, { eq }) => eq(room.id, roomId),
-  });
-}
+    return await db.query.room.findFirst({
+      where: (room, { eq }) => eq(room.id, roomId),
+    });
+  },
+  ['get-room'],
+  { revalidate: 3600, tags: ['rooms'] }
+);
 
 export async function getUserRooms() {
  

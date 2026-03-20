@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
-import NextTopLoader from "nextjs-toploader";
 import { Provider } from "./provider";
 import { Toaster } from "@/components/ui/sonner"
 
@@ -34,7 +33,6 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <Provider>
-          <NextTopLoader />
           {children}
         </Provider>
         <Toaster richColors position="top-right" />

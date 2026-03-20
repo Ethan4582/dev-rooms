@@ -4,6 +4,8 @@ import { Room } from "@/db/schema";
 import { Link as GithubIcon, User, ExternalLink, Edit2, Trash2, Rocket } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface RoomCardProps {
   room: Room;
@@ -13,20 +15,32 @@ interface RoomCardProps {
 }
 
 export function RoomCard({ room, isOwner, onDelete, onEdit }: RoomCardProps) {
+  const [count, setCount] = useState<number | null>(null);
+  
   const languages = String(room.language)
     .split(",")
     .map((lang: string) => lang.trim());
+
+  useEffect(() => {
+    // Simple fetch to the API route I just created
+    fetch(`/api/rooms/${room.id}/status`)
+      .then(res => res.json())
+      .then(data => setCount(data.participantCount))
+      .catch(() => setCount(0));
+  }, [room.id]);
 
   return (
     <div className="bg-surface-dim border border-outline-variant/10 p-8 flex flex-col group hover:bg-[#121212] transition-all duration-300 relative overflow-hidden">
       {/* Card Header: Name and Active Count */}
       <div className="flex justify-between items-start mb-6 gap-4">
-        <h3 className="font-headline font-bold text-2xl tracking-tight text-on-surface group-hover:text-primary transition-colors leading-tight">
+        <h3 className="font-headline font-bold text-2xl tracking-tight text-on-surface group-hover:text-primary transition-colors leading-tight truncate w-full">
           {String(room.name ?? "Untitled Room")}
         </h3>
         <div className="flex items-center gap-2 bg-[#004a31]/20 px-3 py-1.5 border border-[#004a31]/30 shrink-0">
-          <User className="w-3.5 h-3.5 text-primary" />
-          <span className="font-label text-xs font-bold text-primary">12</span>
+          <User className={cn("w-3.5 h-3.5 text-primary", count === null && "animate-pulse")} />
+          <span className={cn("font-label text-xs font-bold text-primary min-w-[1ch]", count === null && "opacity-0")}>
+            {count ?? "--"}
+          </span>
         </div>
       </div>
 

@@ -70,8 +70,6 @@ export function DevfinderVideo({ room }: { room: Room }) {
         
         const cleanup = async () => {
           try {
-            await callToLeave.camera.stopPublishing();
-            await callToLeave.microphone.stopPublishing();
             await callToLeave.camera.disable();
             await callToLeave.microphone.disable();
             await callToLeave.leave();
@@ -91,9 +89,6 @@ export function DevfinderVideo({ room }: { room: Room }) {
 
     try {
       if (call) {
-        // Stop all media tracks explicitly to turn off camera/mic symbols in browser and hardware
-        await call.camera.stopPublishing();
-        await call.microphone.stopPublishing();
         await call.camera.disable();
         await call.microphone.disable();
         await call.leave();

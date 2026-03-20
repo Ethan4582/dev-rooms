@@ -26,11 +26,23 @@ export default async function BrowsePage({
     ? searchParams.tag[0]
     : searchParams.tag;
   
-  // To get the full list of tags based on existing data
+  // Calculate tag counts for "top used" logic
   const allRooms = await getRooms();
-  const allTags = Array.from(new Set(allRooms.flatMap(r => 
-    String(r.language).split(",").map(t => t.trim()).filter(t => t.length > 0)
-  ))).sort();
+  const tagCounts: Record<string, number> = {};
+  allRooms.forEach(r => {
+    String(r.language).split(",").forEach(t => {
+      const clean = t.trim();
+      if (clean) tagCounts[clean] = (tagCounts[clean] || 0) + 1;
+    });
+  });
+
+  const sortedTags = Object.entries(tagCounts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([name]) => name);
+
+  const topTags = sortedTags.slice(0, 5);
+  const otherTags = sortedTags.slice(5).sort();
+  const allDistinctTags = ["All Topics", ...sortedTags].sort();
 
   // Get filtered rooms
   const rooms = await getRooms(search as string, tag as string);
@@ -52,7 +64,7 @@ export default async function BrowsePage({
       actions={actions}
       requireAuth={false}
     >
-      <TopicFilters tags={allTags} />
+      <TopicFilters tags={allDistinctTags} topTags={topTags} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-700">
         {rooms.length === 0 ? (

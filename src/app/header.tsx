@@ -155,7 +155,7 @@ export function Header({ className, showSearch = false }: { className?: string; 
               type="text"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="SEARCH_ACTIVE_CLUSTERS..."
+              placeholder="SEARCH_ACTIVE_ROOM..."
               className="w-full bg-surface-container-highest border border-outline-variant/20 px-10 py-2.5 text-[10px] tracking-widest focus:outline-none focus:border-primary/50 text-on-surface uppercase"
             />
           </form>

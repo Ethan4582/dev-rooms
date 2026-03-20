@@ -14,9 +14,9 @@ export default function SettingsPage() {
           <Settings className="text-outline-variant h-8 w-8" />
         </div>
         <h3 className="font-headline text-xl font-bold uppercase tracking-widest text-on-surface">Configuration Locked</h3>
-        <p className="text-outline text-sm mt-2 font-body">Manage global settings and UI preferences for your terminal shell.</p>
+        <p className="text-outline text-sm mt-2 font-body">Manage global settings and UI preferences for your Rooms</p>
         <button className="mt-8 px-6 py-3 bg-surface-container-highest border border-outline-variant/40 text-xs font-label uppercase tracking-widest text-outline grayscale opacity-50 cursor-not-allowed">
-           Edit_Kernel_Config
+           Edit_Room_Settings
         </button>
       </div>    </DashboardShell>
   );
